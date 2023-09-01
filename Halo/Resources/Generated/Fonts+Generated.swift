@@ -33,6 +33,14 @@ extension Font {
 
 	enum PromptStyle: String {
 		case bold = "Prompt-Bold"
+		case boldItalic = "Prompt-BoldItalic"
+		case extraBold = "Prompt-ExtraBold"
+		case extraBoldItalic = "Prompt-ExtraBoldItalic"
+		case italic = "Prompt-Italic"
+		case medium = "Prompt-Medium"
+		case mediumItalic = "Prompt-MediumItalic"
 		case regular = "Prompt-Regular"
+		case semiBold = "Prompt-SemiBold"
+		case semiBoldItalic = "Prompt-SemiBoldItalic"
 	}
 }

@@ -4,6 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Prompt-SemiBoldItalic.ttf</string>
+		<string>Prompt-SemiBold.ttf</string>
+		<string>Prompt-MediumItalic.ttf</string>
+		<string>Prompt-Medium.ttf</string>
+		<string>Prompt-Italic.ttf</string>
+		<string>Prompt-ExtraBold.ttf</string>
+		<string>Prompt-ExtraBoldItalic.ttf</string>
+		<string>Prompt-BoldItalic.ttf</string>
 		<string>Promt-Regular.ttf</string>
 		<string>Prompt-Bold.ttf</string>
 	</array>
