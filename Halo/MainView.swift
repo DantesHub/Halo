@@ -12,6 +12,7 @@ struct MainView: View {
     @StateObject var mainVM: MainViewModel
     @StateObject var authVM: AuthViewModel
     @StateObject var homeVM: HomeViewModel
+    @State var tappedPlus: Bool = false
     
     init(mainViewModel: MainViewModel) {
         _mainVM = StateObject(wrappedValue: mainViewModel)
@@ -21,91 +22,48 @@ struct MainView: View {
     
     var body: some View {
         if mainVM.homeScreenIsReady {
-            VStack {
-                HStack {
-                    Text("Home")
-                        .foregroundColor(Clr.primary)
-                        .font(Font.prompt(.medium, size: 24))
-                    Spacer()
-                    Img.shoppingIcon
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .foregroundColor(Clr.primary)
-                        .frame(width: 26, height: 26)
-                }.padding(.horizontal, Constants.paddingXLL)
-                .padding(.bottom, 16)
-                ZStack {
-                    Color.white.ignoresSafeArea()
-                    switch mainVM.currentPage {
-                    case .home:
-                        HomeScreen()
-                            .environmentObject(homeVM)
-                    default: HomeScreen()
-                    }
-                }
-                BoxCard(size: BoxSize.option.rawValue) {
+            ZStack {
+                VStack {
                     HStack {
-                        VStack(spacing: -4) {
-                            Image(systemName: "person.2.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(Clr.primary)
-                                .frame(width: 28, height: 28)
-                            Text("Friends")
-                                .font(Font.prompt(.medium, size: 12))
-                        }
+                        Text("Home")
+                            .foregroundColor(Clr.primary)
+                            .font(Font.prompt(.medium, size: 24))
                         Spacer()
-                        VStack(spacing: -4) {
-                            Image(systemName: "house.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(Clr.primary)
-                                .frame(width: 28, height: 28)
-                            Text("Home")
-                                .font(Font.prompt(.medium, size: 12))
+                        Img.shoppingIcon
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .foregroundColor(Clr.primary)
+                            .frame(width: 26, height: 26)
+                    }.padding(.horizontal, Constants.paddingXLL)
+                    .padding(.bottom, 16)
+                    ZStack {
+                        Color.white.ignoresSafeArea()
+                        switch mainVM.currentPage {
+                        case .home:
+                            HomeScreen()
+                                .environmentObject(homeVM)
+                        default: HomeScreen()
                         }
-                        ZStack {
-                            Circle()
-                                .fill(Color.yellow)
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.black, lineWidth: 4)
-                                )
-                                .frame(width: 56, height: 56)
-                                .shadow(radius: 2)
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .font(Font.system(.title).weight(.black))
-                                .foregroundColor(.white)
-                        }.offset(x: 0, y: -20)
-                            .padding(.horizontal, 4)
-                        VStack(spacing: -4) {
-                            Img.shoppingIcon
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(Clr.primary)
-                                .frame(width: 28, height: 28)
-                            Text("Store")
-                                .font(Font.prompt(.medium, size: 12))
+                    }
+                    TabBar(mainVM: mainVM, tappedPlus: $tappedPlus)
+
+                }
+            
+                Color.black.opacity(tappedPlus ? 0.5 : 0)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            tappedPlus.toggle()
                         }
-                        Spacer()
-                        VStack(spacing: -4) {
-                            Image(systemName: "chart.bar.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(Clr.primary)
-                                .frame(width: 28, height: 28)
-                            Text("Store")
-                                .font(Font.prompt(.medium, size: 12))
-                        }
-                       
-                    }.padding(.horizontal, 24)
-                }.padding(.horizontal, Constants.paddingXL)
+                    }
+                
+                FocusModal(tappedPlus: $tappedPlus)
+                    .offset(y: tappedPlus ?  (UIScreen.main.bounds.height / 2 - 150) : UIScreen.main.bounds.height)
             }
-           .navigationBarTitle("Gangs")
+        
+           .navigationBarTitle("")
             .navigationBarHidden(true)
         }
     }

@@ -56,12 +56,8 @@ struct HomeScreen: View {
                                     Text("Normal")
                                         .foregroundColor(Clr.primary)
                                         .font(Font.prompt(.bold, size: Constants.fontLarge))
-                                } .frame(maxWidth: .infinity, alignment: .leading)
-                                Image(systemName: "chevron.right.circle.fill")
-                                    .resizable()
-                                    .foregroundColor(Clr.primaryThird)
-                                    .frame(width: 28, height: 28)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                }.frame(maxWidth: .infinity, alignment: .leading)
+                                BlueArrow()
                             }.padding(.horizontal, Constants.paddingMedium)
                            
                         }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		881DD9932AA181EA006B3DBB /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
 		881DD9942AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
+		881DD9962AA39E78006B3DBB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD9952AA39E78006B3DBB /* TabBar.swift */; };
+		881DD9982AA3AD0C006B3DBB /* FocusModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD9972AA3AD0C006B3DBB /* FocusModal.swift */; };
+		881DD99A2AA3B123006B3DBB /* BlueArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD9992AA3B123006B3DBB /* BlueArrow.swift */; };
 		8856AE4F2A9AAB3A008D5403 /* HaloApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */; };
 		8856AE512A9AAB3A008D5403 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE502A9AAB3A008D5403 /* MainView.swift */; };
 		8856AE532A9AAB3D008D5403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8856AE522A9AAB3D008D5403 /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-SemiBold.ttf"; sourceTree = "<group>"; };
 		881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		881DD9952AA39E78006B3DBB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		881DD9972AA3AD0C006B3DBB /* FocusModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusModal.swift; sourceTree = "<group>"; };
+		881DD9992AA3B123006B3DBB /* BlueArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueArrow.swift; sourceTree = "<group>"; };
 		8856AE4B2A9AAB3A008D5403 /* Halo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloApp.swift; sourceTree = "<group>"; };
 		8856AE502A9AAB3A008D5403 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -232,6 +238,9 @@
 			children = (
 				88A5AC4D2AA1311C007263DA /* BoxCard.swift */,
 				88A5AC4F2AA13188007263DA /* OptionCard */,
+				881DD9952AA39E78006B3DBB /* TabBar.swift */,
+				881DD9972AA3AD0C006B3DBB /* FocusModal.swift */,
+				881DD9992AA3B123006B3DBB /* BlueArrow.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -349,11 +358,14 @@
 				88A5AC502AA13188007263DA /* OptionCard in Sources */,
 				88A5AC2A2A9FDDBC007263DA /* ShadowViewModifier.swift in Sources */,
 				88A5AC4E2AA1311C007263DA /* BoxCard.swift in Sources */,
+				881DD9962AA39E78006B3DBB /* TabBar.swift in Sources */,
 				88A5AC302A9FE095007263DA /* AuthviewModel.swift in Sources */,
 				88A5AC382A9FE26B007263DA /* MainViewModel.swift in Sources */,
 				88A5AC3E2A9FE8A8007263DA /* Constants.swift in Sources */,
 				8856AE4F2A9AAB3A008D5403 /* HaloApp.swift in Sources */,
+				881DD9982AA3AD0C006B3DBB /* FocusModal.swift in Sources */,
 				88A5AC222A9FC152007263DA /* Images+Generated.swift in Sources */,
+				881DD99A2AA3B123006B3DBB /* BlueArrow.swift in Sources */,
 				88A5AC202A9FC152007263DA /* Colors+Generated.swift in Sources */,
 				8880A9432AA16F19006AD7C8 /* UIDevice+Extensions.swift in Sources */,
 				88A5AC3C2A9FE644007263DA /* HomeScreen.swift in Sources */,

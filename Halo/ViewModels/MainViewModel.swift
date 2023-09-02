@@ -16,6 +16,7 @@ class MainViewModel: ObservableObject {
       case home
       case onboarding
       case leaderboard
+      case store
       case profile
       case stats
     }
