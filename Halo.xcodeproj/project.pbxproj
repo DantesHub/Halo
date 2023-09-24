@@ -19,6 +19,7 @@
 		8856AE512A9AAB3A008D5403 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE502A9AAB3A008D5403 /* MainView.swift */; };
 		8856AE532A9AAB3D008D5403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8856AE522A9AAB3D008D5403 /* Assets.xcassets */; };
 		8856AE572A9AAB3D008D5403 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8856AE562A9AAB3D008D5403 /* Preview Assets.xcassets */; };
+		8858F6822ABFF2D6001FAFF9 /* OnboardingCarouselScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8858F6812ABFF2D6001FAFF9 /* OnboardingCarouselScreen.swift */; };
 		886291C92A9ECD2F008E13F3 /* Prompt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */; };
 		8880A9432AA16F19006AD7C8 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8880A9422AA16F19006AD7C8 /* UIDevice+Extensions.swift */; };
 		888903E42A9EC89E00F4FADA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888903E32A9EC89E00F4FADA /* Colors.xcassets */; };
@@ -44,6 +45,7 @@
 		88B773302AA960B6001D6485 /* AgeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B7732F2AA960B6001D6485 /* AgeScreen.swift */; };
 		88B773322AA96C2E001D6485 /* YearsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B773312AA96C2E001D6485 /* YearsScreen.swift */; };
 		88B773342AA96E17001D6485 /* GraphScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B773332AA96E17001D6485 /* GraphScreen.swift */; };
+		88B773362AAE6F37001D6485 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B773352AAE6F37001D6485 /* OnboardingScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,7 @@
 		8856AE522A9AAB3D008D5403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8856AE542A9AAB3D008D5403 /* Halo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Halo.entitlements; sourceTree = "<group>"; };
 		8856AE562A9AAB3D008D5403 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8858F6812ABFF2D6001FAFF9 /* OnboardingCarouselScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCarouselScreen.swift; sourceTree = "<group>"; };
 		886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-Regular.ttf"; sourceTree = "<group>"; };
 		886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-Bold.ttf"; sourceTree = "<group>"; };
 		8880A9422AA16F19006AD7C8 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		88B7732F2AA960B6001D6485 /* AgeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeScreen.swift; sourceTree = "<group>"; };
 		88B773312AA96C2E001D6485 /* YearsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsScreen.swift; sourceTree = "<group>"; };
 		88B773332AA96E17001D6485 /* GraphScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphScreen.swift; sourceTree = "<group>"; };
+		88B773352AAE6F37001D6485 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,7 @@
 		8856AE422A9AAB3A008D5403 = {
 			isa = PBXGroup;
 			children = (
+				8858F6812ABFF2D6001FAFF9 /* OnboardingCarouselScreen.swift */,
 				8856AE4D2A9AAB3A008D5403 /* Halo */,
 				8856AE4C2A9AAB3A008D5403 /* Products */,
 			);
@@ -243,6 +248,7 @@
 				88B7732F2AA960B6001D6485 /* AgeScreen.swift */,
 				88B773312AA96C2E001D6485 /* YearsScreen.swift */,
 				88B773332AA96E17001D6485 /* GraphScreen.swift */,
+				88B773352AAE6F37001D6485 /* OnboardingScreen.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -370,12 +376,14 @@
 				88B773302AA960B6001D6485 /* AgeScreen.swift in Sources */,
 				88A5AC3A2A9FE54A007263DA /* HomeViewModel.swift in Sources */,
 				882213412AA3C7ED00F59F11 /* PrimaryButton.swift in Sources */,
+				8858F6822ABFF2D6001FAFF9 /* OnboardingCarouselScreen.swift in Sources */,
 				88A5AC272A9FDD5C007263DA /* Array+Extensions.swift in Sources */,
 				8856AE512A9AAB3A008D5403 /* MainView.swift in Sources */,
 				88A5AC2A2A9FDDBC007263DA /* ShadowViewModifier.swift in Sources */,
 				88B773322AA96C2E001D6485 /* YearsScreen.swift in Sources */,
 				88A5AC4E2AA1311C007263DA /* BoxCard.swift in Sources */,
 				881DD9962AA39E78006B3DBB /* TabBar.swift in Sources */,
+				88B773362AAE6F37001D6485 /* OnboardingScreen.swift in Sources */,
 				88A5AC302A9FE095007263DA /* AuthviewModel.swift in Sources */,
 				88A5AC382A9FE26B007263DA /* MainViewModel.swift in Sources */,
 				882213432AA3CF6800F59F11 /* OptionButton.swift in Sources */,

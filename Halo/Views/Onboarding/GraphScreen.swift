@@ -22,6 +22,7 @@ struct GraphScreen: View {
            
             }.font(Font.prompt(.bold, size: 36))
                 .multilineTextAlignment(.center)
+                .foregroundColor(Clr.primary)
                 .lineSpacing(-8)
                 .padding(.top, Constants.paddingXLL)
             Text("Halo will create a customized plan to help you drastically decrease the time you spend on your phone")
