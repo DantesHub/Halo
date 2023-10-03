@@ -13,7 +13,14 @@ struct TabBar: View {
     
     
     var body: some View {
-            BoxCard(size: BoxSize.option.rawValue) {
+        ZStack {
+            RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                .fill(Clr.primaryBackground)
+                .primaryShadow()
+            RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                .stroke(.black, lineWidth: 4)
+            VStack {
+                
                 HStack {
                     VStack(spacing: -4) {
                         Image(systemName: "person.2.fill")
@@ -83,7 +90,9 @@ struct TabBar: View {
                         mainVM.currentPage = .stats
                     }
                 }.padding(.horizontal, 24)
-            }.padding(.horizontal, Constants.paddingXL)
+            }
+        }.padding(.horizontal, Constants.paddingXL)
+        .frame(height: UIScreen.main.bounds.height / 14)
     }
 }
 

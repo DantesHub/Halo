@@ -13,7 +13,6 @@ struct BlueArrow: View {
             .resizable()
             .foregroundColor(Clr.primaryThird)
             .frame(width: 28, height: 28)
-            .frame(maxWidth: .infinity, alignment: .trailing)
     }
 }
 

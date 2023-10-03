@@ -24,13 +24,16 @@ struct BoxCard<Content: View>: View {
                 .primaryShadow()
             RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                 .stroke(.black, lineWidth: 4)
-            children
-        }.frame(height: UIScreen.main.bounds.height / size)
+            VStack {
+                children
+            }.clipShape(RoundedRectangle(cornerRadius: Constants.cardCornerRadius))
+        }
+        .frame(height: UIScreen.main.bounds.height / size)
     }
 }
 
 enum BoxSize: CGFloat  {
     case small = 6.5
-    case big = 4
+    case big = 3.5
     case option = 14
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @State private var animateBox = false
+    
     var body: some View {
         GeometryReader { g in
             Clr.primaryBackground.ignoresSafeArea()
@@ -17,7 +19,7 @@ struct HomeScreen: View {
                         RoundedRectangle(cornerRadius: 32)
                             .frame(height:44)
                         HStack() {
-                            Text("Stop Focus Session...")
+                            Text("Screentime Limit: 3 Hrs")
                                 .foregroundColor(.white)
                                 .font(Font.prompt(.medium, size: 20))
                             Spacer()
@@ -29,7 +31,28 @@ struct HomeScreen: View {
                     }
                     
                     BoxCard(size: BoxSize.big.rawValue) {
-                        
+                        VStack(spacing: -16) {
+                            Img.mainHalo
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .rotationEffect(.degrees(animateBox ? 8 : -4))
+                                .offset(y: animateBox ? -7 : 7)
+                                .animation(Animation.easeInOut(duration: 1)
+                                    .repeatForever(autoreverses: true), value: animateBox)
+                                .onAppear() {
+                                    self.animateBox.toggle()
+                                }
+                            Text("Time Remaining: ")
+                                .foregroundColor(Clr.primary)
+                                .font(Font.prompt(.medium, size: 16))
+                            Text("Done!")
+                            .font(Font.prompt(.bold, size: Constants.fontHuge))
+                            .foregroundColor(Clr.primary)
+                         Rectangle()                        
+                                .fill(Clr.primarySecond)
+                            .frame(height: 16)
+                            .background(Clr.primarySecond)
+                        }
                     }
                     
                     BoxCard(size: BoxSize.small.rawValue) {

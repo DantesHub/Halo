@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct OnboardingScreen: View {
+    @State private var devilImageOffset: CGFloat = -200
+    @State private var wingLeftOffset: CGFloat = -200
+    @State private var wingRightOffset: CGFloat = 200
+    @State private var middleAngelsOffset: CGFloat = 400
+    
     var body: some View {
         GeometryReader { g in
             VStack(spacing: -64) {
@@ -15,13 +20,23 @@ struct OnboardingScreen: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: g.size.width)
-                    .offset(y: UIDevice.hasNotch ? -50 : -20)
+                    .offset(y: devilImageOffset)
+                    .onAppear() {
+                        withAnimation(.easeInOut(duration: 0.65)) {
+                            devilImageOffset = UIDevice.hasNotch ? -50 : -20
+                        }
+                    }
                 HStack {
                     Img.wingLeft
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 100, height: 250)
-                        .offset(x: 48)
+                        .offset(x: wingLeftOffset)
+                        .onAppear() {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                wingLeftOffset = 48
+                            }
+                        }
                     VStack(spacing: -16) {
                         (Text("Halo").bold() + Text(", your"))
                         Text("screentime")
@@ -46,7 +61,12 @@ struct OnboardingScreen: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 120, height: 250)
-                        .offset(x: -52)
+                        .offset(x: wingRightOffset)
+                        .onAppear() {
+                            withAnimation(.easeInOut(duration: 0.65)) {
+                                wingRightOffset = -52
+                            }
+                        }
                 }.font(Font.prompt(.medium, size: 40))
                 .multilineTextAlignment(.center)
                 .lineSpacing(-8)
@@ -56,6 +76,12 @@ struct OnboardingScreen: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.width)
+                    .offset(y: middleAngelsOffset)
+                    .onAppear() {
+                        withAnimation(.easeInOut(duration: 0.6 )) {
+                            middleAngelsOffset = -24
+                        }
+                    }
                 Img.girlStudying
                     .resizable()
                     .aspectRatio(contentMode: .fit)

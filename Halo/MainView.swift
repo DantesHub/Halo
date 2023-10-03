@@ -12,7 +12,8 @@ struct MainView: View {
     @StateObject var mainVM: MainViewModel
     @StateObject var authVM: AuthViewModel
     @StateObject var homeVM: HomeViewModel
-    @State var tappedPlus: Bool = false
+    @State private var tappedPlus: Bool = false
+    @State private var showModal: Bool = true
     
     init(mainViewModel: MainViewModel) {
         _mainVM = StateObject(wrappedValue: mainViewModel)
@@ -51,16 +52,19 @@ struct MainView: View {
 
                 }
             
-                Color.black.opacity(tappedPlus ? 0.5 : 0)
+                Color.black.opacity(tappedPlus || showModal ? 0.5 : 0)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
                             tappedPlus.toggle()
+                            showModal.toggle()
                         }
                     }
                 
                 FocusModal(tappedPlus: $tappedPlus)
-                    .offset(y: tappedPlus ?  (UIScreen.main.bounds.height / 2 - 150) : UIScreen.main.bounds.height)
+                    .offset(y: tappedPlus ?  (UIScreen.main.bounds.height / 2 - 164) : UIScreen.main.bounds.height)
+                MiddleModal(showModal: $showModal)
+                    .offset(y: showModal ?  0 : UIScreen.main.bounds.height)
             }
         
            .navigationBarTitle("")

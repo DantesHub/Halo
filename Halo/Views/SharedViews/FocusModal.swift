@@ -12,7 +12,7 @@ struct FocusModal: View {
 
     var body: some View {
         
-        VStack {
+        VStack{
             HStack {
                 Image(systemName: "xmark.circle.fill")
                     .resizable()
@@ -30,34 +30,24 @@ struct FocusModal: View {
                     .resizable()
                     .frame(width: 32, height: 32)
                     .opacity(0)
+            }.padding(.top)
+            VStack(spacing: 16) {
+                FocusSelect(title: "30 minutes", callback: {})
+                FocusSelect(title: "Apps Blocked", callback: {})
+                FocusSelect(title: "Difficulty: Normal", callback: {})
             }
-            ZStack {
-                Capsule()
-                    .fill(Clr.primaryBackground)
-                    .frame(height: 36)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.black, lineWidth: 3)
-                    )
-                HStack {
-                    Text("Duration")
-                        .font(Font.prompt(.medium, size: 20))
-                        .padding(.leading, 8)
-                    Spacer()
-                    BlueArrow()
-                }.padding(.horizontal, 12)
-            }
-            Spacer()
-            Text("gotham")
-        }.frame(width: .infinity, height: 300)
-            .padding(.horizontal, 36)
+         
+            PrimaryButton(title: "Start Session", action: {})
+                .padding(.bottom)
+        }.frame(width: .infinity, height: 348)
+            .padding(.horizontal, 32)
             .foregroundColor(Clr.primary)
-            .background(.yellow)
-            .cornerRadius(24)
+            .background(Clr.primaryBackground)
             .overlay(
                 RoundedRectangle(cornerRadius: 24)
-                    .stroke(Clr.primary, lineWidth: 4.5)
+                    .stroke(Clr.primary, lineWidth: 7)
             )
+            .cornerRadius(24)
 
     }
 }
@@ -65,5 +55,30 @@ struct FocusModal: View {
 struct FocusModal_Previews: PreviewProvider {
     static var previews: some View {
         FocusModal(tappedPlus: .constant(false))
+    }
+}
+
+struct FocusSelect: View {
+    var title: String
+    var callback: () -> ()
+    
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(Clr.primaryBackground)
+                .frame(height: 40)
+                .overlay(
+                    Capsule()
+                        .stroke(Color.black, lineWidth: 3)
+                )
+            HStack {
+                Text(title)
+                    .font(Font.prompt(.medium, size: 20))
+                    .padding(.leading, 8)
+                Spacer()
+                BlueArrow()
+
+            }.padding(.horizontal, 12)
+        }
     }
 }
