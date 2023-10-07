@@ -36,6 +36,7 @@ struct PrimaryButton: View {
                 }.padding(.horizontal, 32)
             }
             .onTapGesture {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 self.opacity = 0.7
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     withAnimation(.spring()) {

@@ -14,26 +14,8 @@ struct MiddleModal: View {
     var body: some View {
         ZStack {
             VStack {
-                
-                
                 HStack {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                        .onTapGesture {
-                            withAnimation {
-                                showModal.toggle()
-                            }
-                        }
-                    Spacer()
-                    Text("You did it!")
-                        .font(Font.prompt(.medium, size: 20))
-                    Spacer()
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                        .opacity(0)
-                }.padding(.top)
+                }.frame(height: 64)
                 Text("🎉")
                     .font(Font.system(size: 72)) // Adjust the size
                     .frame(height: 80)
@@ -41,7 +23,7 @@ struct MiddleModal: View {
                 VStack(spacing: 0) {
                     Text("Total Focus time:")
                         .font(Font.prompt(.regular, size: 20))
-                    Text("120 Minutes")
+                    Text("115 Minutes")
                         .font(Font.prompt(.bold, size: 36))
                         .foregroundColor(Clr.primarySecond)
                     HStack {
@@ -55,9 +37,7 @@ struct MiddleModal: View {
                     }.padding(.top)
                 }
                 
-                
-                PrimaryButton(title: "Restart Session", action: {})
-                    .padding(.bottom)
+                HStack {}.frame(height: 60) .padding(.bottom)
                 
         
             }.frame(width: UIScreen.main.bounds.width / 1.5, height: 400)
@@ -71,6 +51,32 @@ struct MiddleModal: View {
                 .cornerRadius(24)
             LottieView(loopMode: .playOnce, animation: "confetti")
                 .frame(width: 400, height: 400)
+            HStack {
+                Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .onTapGesture {
+                        withAnimation {
+                            print("tapping here")
+                            showModal.toggle()
+                        }
+                    }.zIndex(1000)
+                Spacer()
+                Text("You did it!")
+                    .font(Font.prompt(.medium, size: 20))
+                Spacer()
+                Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .opacity(0)
+            }.frame(width: UIScreen.main.bounds.width / 1.5)
+            .offset(y: -160)
+            PrimaryButton(title: "Restart Session", action: {
+                print("tapping here")
+            })
+            .frame(width: UIScreen.main.bounds.width / 1.5)
+            .offset(y: 160)
+
         }
     }
 }

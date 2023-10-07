@@ -12,6 +12,9 @@ struct OnboardingScreen: View {
     @State private var wingLeftOffset: CGFloat = -200
     @State private var wingRightOffset: CGFloat = 200
     @State private var middleAngelsOffset: CGFloat = 400
+    @StateObject var mainVM: MainViewModel
+    @State private var animateMiddle = false
+
     
     var body: some View {
         GeometryReader { g in
@@ -34,7 +37,7 @@ struct OnboardingScreen: View {
                         .offset(x: wingLeftOffset)
                         .onAppear() {
                             withAnimation(.easeInOut(duration: 0.5)) {
-                                wingLeftOffset = 48
+                                wingLeftOffset = 28
                             }
                         }
                     VStack(spacing: -16) {
@@ -64,7 +67,7 @@ struct OnboardingScreen: View {
                         .offset(x: wingRightOffset)
                         .onAppear() {
                             withAnimation(.easeInOut(duration: 0.65)) {
-                                wingRightOffset = -52
+                                wingRightOffset = -32
                             }
                         }
                 }.font(Font.prompt(.medium, size: 40))
@@ -81,7 +84,13 @@ struct OnboardingScreen: View {
                         withAnimation(.easeInOut(duration: 0.6 )) {
                             middleAngelsOffset = -24
                         }
+                        self.animateMiddle.toggle()
+
                     }
+                    .offset(y: animateMiddle ? -10 : 10)
+                    .animation(Animation.easeInOut(duration: 1)
+                        .repeatForever(autoreverses: true), value: animateMiddle)
+                 
                 Img.girlStudying
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -90,7 +99,7 @@ struct OnboardingScreen: View {
                 Spacer()
                 Spacer()
                 PrimaryButton(title: "Continue") {
-                    
+                    mainVM.homeScreenIsReady = true
                 }.padding(.bottom)
                 .padding(.horizontal, 32)
             }
@@ -102,6 +111,6 @@ struct OnboardingScreen: View {
 
 struct OnboardingScreen_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingScreen()
+        OnboardingScreen(mainVM: MainViewModel())
     }
 }

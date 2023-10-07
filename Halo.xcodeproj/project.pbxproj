@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880BB3832AD0ADF7004307B2 /* DifficultyModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BB3822AD0ADF7004307B2 /* DifficultyModal.swift */; };
 		881DD9932AA181EA006B3DBB /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
 		881DD9942AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
 		881DD9962AA39E78006B3DBB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD9952AA39E78006B3DBB /* TabBar.swift */; };
@@ -16,6 +17,7 @@
 		882213432AA3CF6800F59F11 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882213422AA3CF6800F59F11 /* OptionButton.swift */; };
 		882213452AA3E58500F59F11 /* AverageScreentime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882213442AA3E58500F59F11 /* AverageScreentime.swift */; };
 		882EF0772ACCB18900B3B2CE /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EF0762ACCB18900B3B2CE /* LottieView.swift */; };
+		882EF07A2ACCB42F00B3B2CE /* ShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EF0792ACCB42F00B3B2CE /* ShopScreen.swift */; };
 		8856AE4F2A9AAB3A008D5403 /* HaloApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */; };
 		8856AE512A9AAB3A008D5403 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE502A9AAB3A008D5403 /* MainView.swift */; };
 		8856AE532A9AAB3D008D5403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8856AE522A9AAB3D008D5403 /* Assets.xcassets */; };
@@ -53,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		880BB3822AD0ADF7004307B2 /* DifficultyModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyModal.swift; sourceTree = "<group>"; };
 		881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-SemiBold.ttf"; sourceTree = "<group>"; };
 		881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		881DD9952AA39E78006B3DBB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		882213422AA3CF6800F59F11 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		882213442AA3E58500F59F11 /* AverageScreentime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageScreentime.swift; sourceTree = "<group>"; };
 		882EF0762ACCB18900B3B2CE /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		882EF0792ACCB42F00B3B2CE /* ShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreen.swift; sourceTree = "<group>"; };
 		8856AE4B2A9AAB3A008D5403 /* Halo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloApp.swift; sourceTree = "<group>"; };
 		8856AE502A9AAB3A008D5403 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -113,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		882EF0782ACCB40700B3B2CE /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				882EF0792ACCB42F00B3B2CE /* ShopScreen.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		8856AE422A9AAB3A008D5403 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +147,7 @@
 				88A5AC2E2A9FE07A007263DA /* Models */,
 				88A5AC2D2A9FE074007263DA /* ViewModels */,
 				88A5AC2C2A9FE070007263DA /* Views */,
+				88A5AC3B2A9FE644007263DA /* HomeScreen.swift */,
 				88A5AC242A9FDD20007263DA /* Helpers */,
 				88A5AC232A9FC641007263DA /* Info.plist */,
 				888903E22A9EC76E00F4FADA /* Resources */,
@@ -240,10 +253,10 @@
 		88A5AC2C2A9FE070007263DA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				882EF0782ACCB40700B3B2CE /* Shop */,
 				88A5AC352A9FE172007263DA /* SharedViews */,
 				88A5AC342A9FE0D8007263DA /* Onboarding */,
 				88A5AC322A9FE0D5007263DA /* Auth.swift */,
-				88A5AC3B2A9FE644007263DA /* HomeScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +302,7 @@
 				882213422AA3CF6800F59F11 /* OptionButton.swift */,
 				887418172ACC9F1D0042665A /* MiddleModal.swift */,
 				882EF0762ACCB18900B3B2CE /* LottieView.swift */,
+				880BB3822AD0ADF7004307B2 /* DifficultyModal.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -404,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				882EF07A2ACCB42F00B3B2CE /* ShopScreen.swift in Sources */,
 				88A5AC212A9FC152007263DA /* Fonts+Generated.swift in Sources */,
 				88B773302AA960B6001D6485 /* AgeScreen.swift in Sources */,
 				88A5AC3A2A9FE54A007263DA /* HomeViewModel.swift in Sources */,
@@ -419,6 +434,7 @@
 				88B773362AAE6F37001D6485 /* OnboardingScreen.swift in Sources */,
 				88A5AC302A9FE095007263DA /* AuthviewModel.swift in Sources */,
 				88A5AC382A9FE26B007263DA /* MainViewModel.swift in Sources */,
+				880BB3832AD0ADF7004307B2 /* DifficultyModal.swift in Sources */,
 				882213432AA3CF6800F59F11 /* OptionButton.swift in Sources */,
 				88A5AC3E2A9FE8A8007263DA /* Constants.swift in Sources */,
 				88B773342AA96E17001D6485 /* GraphScreen.swift in Sources */,

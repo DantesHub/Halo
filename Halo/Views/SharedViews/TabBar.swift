@@ -31,6 +31,7 @@ struct TabBar: View {
                         Text("Friends")
                             .font(Font.prompt(.medium, size: 12))
                     }.onTapGesture {
+                        mainVM.homeScreenIsReady = false
                         mainVM.currentPage = .leaderboard
                     }
                     Spacer()

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct FocusModal: View {
+    @ObservedObject var mainVM: MainViewModel
     @Binding var tappedPlus: Bool
+    @Binding var tappedDifficulty: Bool
 
     var body: some View {
         
@@ -34,12 +36,17 @@ struct FocusModal: View {
             VStack(spacing: 16) {
                 FocusSelect(title: "30 minutes", callback: {})
                 FocusSelect(title: "Apps Blocked", callback: {})
-                FocusSelect(title: "Difficulty: Normal", callback: {})
+                FocusSelect(title: "Difficulty: \(mainVM.selectedDifficulty.rawValue)", callback: {
+                    withAnimation {
+                        tappedDifficulty.toggle()
+                    }
+                })
             }
          
-            PrimaryButton(title: "Start Session", action: {})
-                .padding(.bottom)
-        }.frame(width: .infinity, height: 348)
+            PrimaryButton(title: "Start Session", action: {
+                mainVM.startFocusSession()
+            }).padding(.bottom, 48)
+        }.frame(height: 380)
             .padding(.horizontal, 32)
             .foregroundColor(Clr.primary)
             .background(Clr.primaryBackground)
@@ -54,7 +61,7 @@ struct FocusModal: View {
 
 struct FocusModal_Previews: PreviewProvider {
     static var previews: some View {
-        FocusModal(tappedPlus: .constant(false))
+        FocusModal(mainVM: MainViewModel(), tappedPlus: .constant(false), tappedDifficulty:  .constant(false))
     }
 }
 
@@ -75,10 +82,14 @@ struct FocusSelect: View {
                 Text(title)
                     .font(Font.prompt(.medium, size: 20))
                     .padding(.leading, 8)
+                    .foregroundColor(Clr.primary)
                 Spacer()
                 BlueArrow()
 
             }.padding(.horizontal, 12)
+        }.onTapGesture {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            callback()
         }
     }
 }

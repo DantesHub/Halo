@@ -36,4 +36,5 @@ enum BoxSize: CGFloat  {
     case small = 6.5
     case big = 3.5
     case option = 14
+    case tile = 4.5
 }
