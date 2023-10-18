@@ -12,7 +12,7 @@ struct BlueArrow: View {
         Image(systemName: "chevron.right.circle.fill")
             .resizable()
             .foregroundColor(Clr.primaryThird)
-            .frame(width: 28, height: 28)
+            .frame(width: 24, height: 24)
     }
 }
 

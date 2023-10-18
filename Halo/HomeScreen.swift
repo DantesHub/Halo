@@ -18,20 +18,7 @@ struct HomeScreen: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 24) {
-                        HStack {
-                            Text("Home")
-                                .foregroundColor(Clr.primary)
-                                .font(Font.prompt(.medium, size: 24))
-                            Spacer()
-                            Img.shoppingIcon
-                                .resizable()
-                                .frame(width: 32, height: 32)
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundColor(Clr.primary)
-                                .frame(width: 26, height: 26)
-                        }
-                        .padding(.horizontal, 8)
+                
                         ZStack {
                             RoundedRectangle(cornerRadius: 32)
                                 .frame(height:44)

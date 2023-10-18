@@ -4,6 +4,8 @@ import SwiftUI
 
 /// Cases to reference for safely initializing colors, like so: `Clr.Fill.primary`
 public enum Clr {
+  /// **Universal - Any**: `#CC5A59` with alpha: `1.000`
+  public static let dndPurple = Color("dndPurple")
   /// **Universal - Any**: `#A5E4FF` with alpha: `1.000`
   public static let highlight = Color("highlight")
   /// **Universal - Any**: `#121212` with alpha: `1.000`

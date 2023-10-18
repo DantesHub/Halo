@@ -23,6 +23,18 @@ class MainViewModel: ObservableObject {
     var formattedTime: String {
         return secondsToHoursMinutesSeconds(seconds: timeRemaining)
     }
+    
+    // Schedules
+    @Published var days: [Day] = [
+         Day(name: "S"),
+         Day(name: "M"),
+         Day(name: "T"),
+         Day(name: "W"),
+         Day(name: "T"),
+         Day(name: "F"),
+         Day(name: "S")
+     ]
+    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -103,4 +115,12 @@ enum Page {
     case store
     case profile
     case stats
+}
+
+
+
+struct Day: Identifiable {
+ let id = UUID()  
+ let name: String
+ var isSelected: Bool = true
 }

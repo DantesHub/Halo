@@ -28,14 +28,14 @@ struct TabBar: View {
                             .aspectRatio(contentMode: .fit)
                             .foregroundColor(mainVM.currentPage == .leaderboard ? Clr.primarySecond : Clr.primary)
                             .frame(width: 28, height: 28)
-                        Text("Friends")
+                        Text("Squads")
                             .font(Font.prompt(.medium, size: 12))
                     }.onTapGesture {
                         mainVM.homeScreenIsReady = false
                         mainVM.currentPage = .leaderboard
                     }
                     Spacer()
-                    VStack(spacing: -4) {
+                    VStack(spacing: -2) {
                         Image(systemName: "house.fill")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -67,13 +67,13 @@ struct TabBar: View {
                                 tappedPlus.toggle()
                             }
                         }
-                    VStack(spacing: -4) {
-                        Img.shoppingIcon
+                    VStack(spacing: -2) {
+                        Image(systemName: "clock.fill")
                             .resizable()
                             .renderingMode(.template)
                             .foregroundColor(mainVM.currentPage == .store ? Clr.primarySecond : Clr.primary)
-                            .frame(width: 28, height: 28)
-                        Text("Store")
+                            .frame(width: 24, height: 24)
+                        Text("Rules")
                             .font(Font.prompt(.medium, size: 12))
                     }.onTapGesture {
                         mainVM.currentPage = .store

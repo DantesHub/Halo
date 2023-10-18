@@ -10,7 +10,7 @@ import SwiftUI
 struct ShopScreen: View {
     
     // MARK: - Properties
-    
+    @Binding var isPresented: Bool
     @State private var showModal = false
     @State private var animateBox = false
 
@@ -26,14 +26,26 @@ struct ShopScreen: View {
                 let height = g.size.height
                 VStack(spacing: 0) {
                     HStack {
-                        Text("🛍️ Guardian Shop")
-                            .foregroundColor(Clr.primary)
-                            .font(Font.prompt(.medium, size: 24))
-                        Spacer()
-                        Image(systemName: "person.crop.circle")
+                        Image(systemName: "arrow.backward.circle.fill")
                             .resizable()
-                            .foregroundColor(Clr.primary)
-                            .frame(width: 26, height: 26)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 32)
+                            .onTapGesture {
+                                UIImpactFeedbackGenerator(style: .light)
+                                    .impactOccurred()
+                                withAnimation {
+                                    isPresented.toggle()
+                                }
+                            }
+                        Spacer()
+                        HStack {
+                            Img.haloCoin
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 32)
+                            Text("1000")
+                                .font(Font.prompt(.medium, size: 24))
+                        }
                     }.padding(.horizontal, 36)
                     ScrollView(showsIndicators: false) {
                                 // First Column (Slightly Bigger)
@@ -41,16 +53,10 @@ struct ShopScreen: View {
                                     // Add your badge plants here for the first column
                                     HStack(spacing: 32) {
                                         VStack(alignment: .leading, spacing: 24) {
-                                            HStack {
-                                                Img.haloCoin
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(height: 32)
-                                                Text("1000")
-                                                    .font(Font.prompt(.medium, size: 24))
-                                            }.offset(y: 8)
-                                    
-                                                
+                                            Text("Guardian Shop 🛍️ ")
+                                                .foregroundColor(Clr.primary)
+                                                .font(Font.prompt(.medium, size: 24))
+                                                .offset(x: 8, y: 8)
                                             ForEach(0..<6, id: \.self) { index in
                                                 BoxCard(size: BoxSize.tile.rawValue) {
                                                     VStack(spacing: -12) {
@@ -132,7 +138,7 @@ struct ShopScreen: View {
 
 struct ShopScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ShopScreen()
+        ShopScreen(isPresented: .constant(false))
     }
 }
 

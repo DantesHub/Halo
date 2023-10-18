@@ -13,7 +13,7 @@ struct HaloApp: App {
         let mainViewModel = MainViewModel()
         
         WindowGroup {
-            MainView(mainViewModel: mainViewModel)
+            ConnectScreentime()
         }
     }
 }
