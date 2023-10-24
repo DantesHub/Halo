@@ -8,17 +8,12 @@
 import DeviceActivity
 import SwiftUI
 
-extension DeviceActivityReport.Context {
-    static let totalActivity = Self("Total Activity")
-    static let stats = Self("Stats")
-//    static let pieChart = Self("pieChart")
-}
 
-struct TotalActivityReport: DeviceActivityReportScene {
+struct StatsActivityReport: DeviceActivityReportScene {
     
-    let context: DeviceActivityReport.Context = .totalActivity
+    let context: DeviceActivityReport.Context = .stats
     
-    let content: (ActivityReport) -> TotalActivityView
+    let content: (ActivityReport) -> StatsActivityView
     
     func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) async -> ActivityReport {
         // the report's view.

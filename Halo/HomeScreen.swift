@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 struct HomeScreen: View {
     @ObservedObject var mainVM: MainViewModel
     @ObservedObject var homeVM: HomeViewModel
+    @StateObject var familyModel = FamilyViewModel.shared
     @State private var animateBox = false
+    @State var isPresented = false
     
     var body: some View {
         GeometryReader { g in
@@ -18,19 +21,44 @@ struct HomeScreen: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 24) {
-                
                         ZStack {
                             RoundedRectangle(cornerRadius: 32)
                                 .frame(height:44)
                             HStack() {
-                                Text("Screentime Limit: 3 Hrs")
+                                Text("Start Focus Session")
                                     .foregroundColor(.white)
                                     .font(Font.prompt(.medium, size: 20))
                                 Spacer()
-                                Image(systemName: "pause.fill")
+                                Image(systemName: "play.fill")
                                     .resizable()
                                     .foregroundColor(Color.white)
                                     .frame(width: 20, height: 20)
+                                    .onTapGesture {
+                                        Task {
+                                            do {
+                                                try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
+                                                familyModel.title = "focus"
+                                                familyModel.restoreBlockedApps()
+                                                isPresented = true
+                                            } catch {
+                                                print("failed to enroll \(error)")
+                                            }
+                                            
+                                            _ = AuthorizationCenter.shared.$authorizationStatus
+                                                .sink() {_ in
+                                                    switch AuthorizationCenter.shared.authorizationStatus {
+                                                    case .notDetermined:
+                                                        print("not determined")
+                                                    case .denied:
+                                                        print("denied")
+                                                    case .approved:
+                                                        print("approved")
+                                                    @unknown default:
+                                                        break
+                                                    }
+                                                }
+                                        }
+                                    }
                             }.padding(.horizontal, Constants.paddingLarge)
                         }
                         
@@ -124,7 +152,8 @@ struct HomeScreen: View {
                 }
             }
         }.onAppear {}
-        
+            .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
+
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
 //            .padding(.horizontal, Constants.paddingStandard)
 //            .padding(.vertical, Constants.paddingSmall)

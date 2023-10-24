@@ -104,7 +104,7 @@ struct DifficultySelect: View {
 
 enum Difficulty: String {
     case normal = "Normal"
-    case deepfocus = "Deep Focus"
+    case deepfocus = "Deep Focus (1.5x coin bonus)"
     
     var description: String {
         switch self {

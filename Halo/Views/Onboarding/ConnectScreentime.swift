@@ -7,25 +7,29 @@
 
 import SwiftUI
 import FamilyControls
-import _DeviceActivity_SwiftUI
+import Report
+import DeviceActivity
 
 extension DeviceActivityReport.Context {
   static let totalActivity = Self("Total Activity")
+  static let stats = Self("Stats")
 }
+
 
 struct ConnectScreentime: View {
     @State var isPresented = false
-    @StateObject var familyModel = FamilyModel.shared
-    
-    let context: DeviceActivityReport.Context = .totalActivity
-      let filter = DeviceActivityFilter(
-      segment:.daily(
-        during: DateInterval(
-          start: Date().addingTimeInterval(-1),
-          end: Date()
-        )
-      ))
-    
+    @StateObject var familyModel = FamilyViewModel.shared
+ 
+    @State private var context: DeviceActivityReport.Context = .stats
+    @State private var filter = DeviceActivityFilter(
+        segment: .daily(
+            during: Calendar.current.dateInterval(
+               of: .day, for: .now
+            )!
+        ),
+        users: .all,
+        devices: .init([.iPhone])
+    )
     var body: some View {
         VStack(spacing: 16) {
             VStack(spacing: -16){
@@ -39,13 +43,14 @@ struct ConnectScreentime: View {
                 .foregroundColor(Clr.primary)
                 .lineSpacing(-8)
                 .padding(.top, Constants.paddingXLL)
+            Spacer()
             Img.halo
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 160)
                 .offset(y: 20)
             BoxCard(size: 4) {
-                
+                DeviceActivityReport(context, filter: filter)
             }
             Img.blueArrow
                 .resizable()
@@ -80,7 +85,10 @@ struct ConnectScreentime: View {
             }.padding(.bottom, Constants.paddingXLL)
             .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
         }.onAppear {
-      
+            // Create a new instance of the DeviceActivityReport class.
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                
+            }
         }
         .padding(.horizontal, 48)
     }

@@ -12,7 +12,9 @@ import Foundation
 import FamilyControls
 import ManagedSettings
 
-struct TotalActivityView: View {
+// cant get app icons on IOS 17, only iphone apps
+
+struct StatsActivityView: View {
     var activityReport: ActivityReport
     
     @State var totalDurationInSeconds: Int
@@ -50,7 +52,6 @@ struct TotalActivityView: View {
                                     .padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 50))
                             }
                         )
-                    
                     Spacer()
                     
                     RoundedRectangle(cornerRadius: 12)
@@ -81,20 +82,10 @@ struct TotalActivityView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // .background(Color(hex: 0xFFFAFAFA)
-        .background(Color(hex: 0xFF1B1631))
+        .background(Color.red)
         .ignoresSafeArea()
         .edgesIgnoringSafeArea(.all)
-        .foregroundColor(Color(hex: 0xFF1B1631))
-        // .foregroundColor(Color(hex: 0xFFFAFAFA))
     }
 
 }
 
-extension Color {
-    init(hex: UInt32) {
-        let red = Double((hex >> 16) & 0xFF) / 255.0
-        let green = Double((hex >> 8) & 0xFF) / 255.0
-        let blue = Double(hex & 0xFF) / 255.0
-        self.init(red: red, green: green, blue: blue)
-    }
-}

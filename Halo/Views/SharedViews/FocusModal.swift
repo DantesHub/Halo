@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import FamilyControls
 
 struct FocusModal: View {
     @ObservedObject var mainVM: MainViewModel
+    @State private var isPresented: Bool = false
+    @StateObject var familyModel = FamilyViewModel.shared
     @Binding var tappedPlus: Bool
     @Binding var tappedDifficulty: Bool
 
@@ -35,7 +38,33 @@ struct FocusModal: View {
             }.padding(.top)
             VStack(spacing: 16) {
                 FocusSelect(title: "30 minutes", callback: {})
-                FocusSelect(title: "Apps Blocked", callback: {})
+                FocusSelect(title: "Apps Blocked", callback: {
+                    Task {
+
+                    do {
+                        try await AuthorizationCenter.shared.requestAuthorization(for: .individual)
+                        familyModel.title = "focus"
+                        familyModel.restoreBlockedApps()
+                        isPresented = true
+                    } catch {
+                        print("failed to enroll \(error)")
+                    }
+
+                    _ = AuthorizationCenter.shared.$authorizationStatus
+                        .sink() {_ in
+                        switch AuthorizationCenter.shared.authorizationStatus {
+                        case .notDetermined:
+                            print("not determined")
+                        case .denied:
+                            print("denied")
+                        case .approved:
+                            print("approved")
+                        @unknown default:
+                            break
+                        }
+                    }
+                }
+                })
                 FocusSelect(title: "Difficulty: \(mainVM.selectedDifficulty.rawValue)", callback: {
                     withAnimation {
                         tappedDifficulty.toggle()
@@ -55,7 +84,7 @@ struct FocusModal: View {
                     .stroke(Clr.primary, lineWidth: 7)
             )
             .cornerRadius(24)
-
+            .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
     }
 }
 

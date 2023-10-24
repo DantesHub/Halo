@@ -9,11 +9,24 @@ import SwiftUI
 
 @main
 struct HaloApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    init() {
+        UNUserNotificationCenter.current().delegate = appDelegate
+    }
+    
     var body: some Scene {
         let mainViewModel = MainViewModel()
         
         WindowGroup {
-            ConnectScreentime()
+//            ConnectScreentime()
+//                .onAppear {
+//                    print("spotrusher")
+//                }
+            MainView(mainViewModel: mainViewModel)
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                }
+
         }
     }
 }

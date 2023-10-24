@@ -8,15 +8,22 @@
 
 import SwiftUI
 
-struct AppSessionModal: View {
+struct AppScheduleModal: View {
     @ObservedObject var mainVM: MainViewModel
     @State private var toggleBreaks: Bool = false
     @State private var toggleAllDay: Bool = false
     @State private var showTextField: Bool = false
-    @State private var sessionTitle: String = "My App Session"
-    @State private var startTime = Calendar.current.date(from: DateComponents(hour: 9)) ?? Date()
-    @State private var endTime = Calendar.current.date(from: DateComponents(hour: 17)) ?? Date()
-
+    @State private var sessionTitle: String = "💎 My Schedule"
+    @Binding var showAppSession: Bool
+    @StateObject var familyViewModel = FamilyViewModel.shared
+    @State private var presentFamilyPicker = false
+    @State private var starts: Date = Calendar.current.date(from: DateComponents(hour: 0, minute: 0))!
+    @State private var ends: Date = Calendar.current.date(from: DateComponents(hour: 23, minute: 59))!
+    @State private var days: [Day] = [Day(name: "S"),Day(name: "M"), Day(name: "T"), Day(name: "W"),Day(name: "T"),Day(name: "F"),Day(name: "S")]
+    
+    var isAtLeastOneDaySelected: Bool {
+        return days.contains { $0.isSelected }
+    }
 
     var body: some View {
         
@@ -28,6 +35,7 @@ struct AppSessionModal: View {
                     .frame(width: 32, height: 32)
                     .onTapGesture {
                         withAnimation {
+                            showAppSession.toggle()
                         }
                     }
                 Spacer()
@@ -72,11 +80,44 @@ struct AppSessionModal: View {
                         HStack {
                             Text("Apps Blocked")
                             Spacer()
-                            Text("Select Apps")
-                                .foregroundStyle(Clr.primaryThird)
+                            if familyViewModel.appsCount == 0 && familyViewModel.categoriesCount == 0   {
+                                Text("Select Apps")
+                                    .foregroundStyle(Clr.primaryThird)
+                            } else {
+                                Image(systemName: "lock.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 10)
+                                if familyViewModel.categoriesCount > 0 {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "square.grid.2x2")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 16)
+                                        Text("\(familyViewModel.categoriesCount)")
+                                            .font(Font.prompt(.regular, size: 16))
+                                    }
+                                }
+                                if familyViewModel.appsCount > 0 {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "apps.iphone")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 10)
+                                        Text("\(familyViewModel.appsCount)")
+                                            .font(Font.prompt(.regular, size: 16))
+                                    }
+                                }
+                            }
                             BlueArrow()
-                        }
-                        .padding(.horizontal)
+                        }.padding(.horizontal)
+                            .onTapGesture {
+                                withAnimation {
+                                    familyViewModel.title = mainVM.selectedSchedule.id.uuidString
+                                    familyViewModel.restoreBlockedApps()
+                                    presentFamilyPicker = true
+                                }
+                            }
                         Rectangle()
                             .frame(height: 2.5)
                             .foregroundColor(Clr.primary)
@@ -116,20 +157,31 @@ struct AppSessionModal: View {
                         HStack {
                             Toggle("All Day", isOn: $toggleAllDay)
                                 .tint(Clr.primarySecond)
+                                .onChange(of: toggleAllDay) { newValue in
+                                    if newValue {
+                                       starts = Calendar.current.date(from: DateComponents(hour: 0, minute: 0))!
+                                       ends =  Calendar.current.date(from: DateComponents(hour: 23, minute: 59))!
+                                    } else {
+                                        ends = Calendar.current.date(from: DateComponents(hour: 23, minute: 58))!
+                                    }
+                                    // Handle the change here
+                                }
+                                
                         }.padding(.horizontal)
-                        Rectangle()
-                            .frame(height: 2.5)
-                            .foregroundColor(Clr.primary)
-                        HStack {
-                            DatePicker("Starts", selection: $startTime, displayedComponents: [.hourAndMinute])
-                        }.padding(.horizontal)
-                        Rectangle()
-                            .frame(height: 2.5)
-                            .foregroundColor(Clr.primary)
-                        HStack {
-                            DatePicker("Ends", selection: $endTime, displayedComponents: [.hourAndMinute])
-                        }.padding(.horizontal)
-                        
+                        if !toggleAllDay {
+                            Rectangle()
+                                .frame(height: 2.5)
+                                .foregroundColor(Clr.primary)
+                            HStack {
+                                DatePicker("Starts", selection: $starts, displayedComponents: [.hourAndMinute])
+                            }.padding(.horizontal)
+                            Rectangle()
+                                .frame(height: 2.5)
+                                .foregroundColor(Clr.primary)
+                            HStack {
+                                DatePicker("Ends", selection: $ends, displayedComponents: [.hourAndMinute])
+                            }.padding(.horizontal)
+                        }
                     }
                     .frame(height: toggleAllDay ? 48 : 164)
                     .foregroundColor(Clr.primary)
@@ -141,8 +193,8 @@ struct AppSessionModal: View {
                             .stroke(Clr.primary, lineWidth: 2.5)
                         )
                     HStack(alignment: .center) {
-                        ForEach(Array(mainVM.days.indices), id: \.self) { index in
-                            DayBubble(day: $mainVM.days[index])
+                        ForEach(Array(0..<7), id: \.self) { index in
+                            DayBubble(day: $days[index])
                         }
                     }.frame(height: 56, alignment: .center)
                     .padding(.horizontal)
@@ -156,12 +208,22 @@ struct AppSessionModal: View {
                 }
             }
          
-            PrimaryButton(title: "Save Limit", action: {
+            PrimaryButton(title: "Save Schedule", action: {
                 withAnimation {
-                    
+                    let saveSchedule = Schedule(title: sessionTitle, breaks: toggleBreaks, starts: starts, ends: ends, daysOfWeek: days, appsCount: familyViewModel.appsCount, categoriesCount: familyViewModel.categoriesCount)
+                    if mainVM.selectedSchedule.isSuggested {
+                        mainVM.user.schedules.append(saveSchedule)
+                    } else {
+                        if let index = mainVM.user.schedules.firstIndex(where: { $0.id == mainVM.selectedSchedule.id }) {
+                            mainVM.user.schedules[index] = saveSchedule
+                        }
+                    }
+                    mainVM.saveData()
+                    showAppSession.toggle()
+                    mainVM.selectedSchedule = Schedule.templateSchedule
                 }
-            }).padding(.bottom, 32)
-        }.frame(height: 640)
+            }, isDisabled: (!isAtLeastOneDaySelected || (familyViewModel.appsCount == 0 && familyViewModel.categoriesCount == 0))).padding(.bottom, 32)
+        }.frame(height: toggleAllDay ? 526 : 640)
             .padding(.horizontal, 32)
             .foregroundColor(Clr.primary)
             .background(Clr.primaryBackground)
@@ -170,28 +232,54 @@ struct AppSessionModal: View {
                     .stroke(Clr.primary, lineWidth: 7)
             )
             .cornerRadius(24)
-
+            .animation(.easeInOut(duration: 0.3), value: toggleAllDay)
+            .onChange(of: showAppSession) { newValue in
+                if newValue {
+                    updateData()
+                }
+            }
+            .familyActivityPicker(isPresented: $presentFamilyPicker, selection: $familyViewModel.selectionToDiscourage)
+    }
+    
+    private func updateData() {
+        if  mainVM.selectedSchedule.title == "💎 My Schedule" || mainVM.selectedSchedule.isSuggested {
+            familyViewModel.appsCount = 0
+            familyViewModel.categoriesCount = 0
+        } else {
+            familyViewModel.restoreBlockedApps()
+        }
+        sessionTitle = mainVM.selectedSchedule.title
+        toggleAllDay = mainVM.selectedSchedule.isAllDay
+        toggleBreaks = mainVM.selectedSchedule.breaks
+        starts = mainVM.selectedSchedule.starts
+        ends = mainVM.selectedSchedule.ends
+        days = mainVM.selectedSchedule.daysOfWeek
     }
 }
+
 struct DayBubble: View {
     @Binding var day: Day
-
+    //TODO: at least one must be selected
     var body: some View {
-        Text(day.name)
-            .frame(width: 12, height: 12)
-            .font(Font.prompt(.medium, size: 12))
-            .padding(12)
-            .background(day.isSelected ? Clr.primarySecond : Color.gray.opacity(0.5))
-            .foregroundColor(day.isSelected ? .white : .black)
-            .clipShape(Circle())
-            .onTapGesture {
+        ZStack {
+            Circle()
+                .fill(day.isSelected ? Clr.primarySecond : Color.gray.opacity(0.5))
+                .frame(width: 36, height: 36)
+            Text(day.name)
+                .font(Font.prompt(.bold, size: 12))
+                .foregroundColor(day.isSelected ? .white : .black)
+        }.onTapGesture {
                 day.isSelected.toggle()
-            }
+        }
+
+
+
+      
     }
 }
-struct AppSessionModal_Previews: PreviewProvider {
+struct AppScheduleModal_Previews: PreviewProvider {
     static var previews: some View {
-        AppSessionModal(mainVM: MainViewModel())
+        AppScheduleModal(mainVM: MainViewModel(), showAppSession: .constant(false))
     }
 }
 

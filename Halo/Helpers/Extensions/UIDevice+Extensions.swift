@@ -35,5 +35,5 @@ extension UIDevice {
     static var isSmall: Bool {
         return !UIDevice.hasNotch && !UIDevice.isIPad
     }
-        
+            
 }

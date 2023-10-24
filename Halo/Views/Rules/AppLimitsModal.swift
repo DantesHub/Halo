@@ -10,9 +10,12 @@ import SwiftUI
 
 struct AppLimitsModal: View {
     @ObservedObject var mainVM: MainViewModel
+    @StateObject var familyViewModel = FamilyViewModel.shared
+    @State private var presentFamilyPicker = false
     @State private var toggleBreaks: Bool = false
     @State private var showTextField: Bool = false
-    @State private var limitTitle: String = "My App Limit"
+    @State private var limitTitle: String = "⏲️ My App Limit"
+    @Binding var showAppLimits: Bool
 
     var body: some View {
         
@@ -23,6 +26,7 @@ struct AppLimitsModal: View {
                     .frame(width: 32, height: 32)
                     .onTapGesture {
                         withAnimation {
+                            showAppLimits.toggle()
                         }
                     }
                 Spacer()
@@ -131,6 +135,11 @@ struct AppLimitsModal: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Clr.primary, lineWidth: 2.5)
                         )
+                        .onTapGesture {
+                            familyViewModel.title = "schedule"
+                            familyViewModel.restoreBlockedApps()
+                            presentFamilyPicker.toggle()
+                        }
                 }
             }
          
@@ -148,13 +157,14 @@ struct AppLimitsModal: View {
                     .stroke(Clr.primary, lineWidth: 7)
             )
             .cornerRadius(24)
+            .familyActivityPicker(isPresented: $presentFamilyPicker, selection: $familyViewModel.selectionToDiscourage)
 
     }
 }
 
 struct AppLimitsModal_Previews: PreviewProvider {
     static var previews: some View {
-        AppLimitsModal(mainVM: MainViewModel())
+        AppLimitsModal(mainVM: MainViewModel(), showAppLimits: .constant(false))
     }
 }
 

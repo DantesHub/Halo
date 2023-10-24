@@ -76,7 +76,7 @@ struct TabBar: View {
                         Text("Rules")
                             .font(Font.prompt(.medium, size: 12))
                     }.onTapGesture {
-                        mainVM.currentPage = .store
+                        mainVM.currentPage = .rule
                     }
                     Spacer()
                     VStack(spacing: -4) {

@@ -12,10 +12,15 @@ struct MainView: View {
     @StateObject var mainVM: MainViewModel
     @StateObject var authVM: AuthViewModel
     @StateObject var homeVM: HomeViewModel
+    @StateObject var familyModel = FamilyViewModel.shared
     @State private var tappedPlus: Bool = false
-    @State private var showModal: Bool = true
+    @State private var showModal: Bool = false
     @State private var tappedDifficulty: Bool = false
     @State private var showShop: Bool = false
+    @State private var showUnlock: Bool = false
+    @State private var addAppLimit: Bool = false
+    @State private var addAppSchedule: Bool = false
+
     
     init(mainViewModel: MainViewModel) {
         _mainVM = StateObject(wrappedValue: mainViewModel)
@@ -32,7 +37,6 @@ struct MainView: View {
                         Text("Home")
                             .foregroundColor(Clr.primary)
                             .font(Font.prompt(.medium, size: 24))
-                        
                         Spacer()
                         Img.shoppingIcon
                             .resizable()
@@ -53,25 +57,29 @@ struct MainView: View {
                     ZStack {
                         Color.white.ignoresSafeArea()
                         switch mainVM.currentPage {
-                        case .home:
-                            HomeScreen(mainVM: mainVM, homeVM: homeVM)
-                                .environmentObject(homeVM)
-                        case .store:
-                            EmptyView()
-                        default: HomeScreen(mainVM: mainVM, homeVM: homeVM)
+                            case .home:
+                                HomeScreen(mainVM: mainVM, homeVM: homeVM)
+                                    .environmentObject(homeVM)
+                            case .store:
+                                EmptyView()
+                            case .rule:
+                                RulesScreen(mainVM: mainVM, addAppLimit: $addAppLimit, addAppSchedule: $addAppSchedule)
+                            default: HomeScreen(mainVM: mainVM, homeVM: homeVM)
                         }
                     }
                     TabBar(mainVM: mainVM, tappedPlus: $tappedPlus)
 
                 }
             
-                Color.black.opacity(tappedPlus || showModal ? 0.5 : 0)
+                Color.black.opacity(tappedPlus || showModal || addAppSchedule || addAppLimit ? 0.5 : 0)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
                             tappedPlus = false
                             showModal = false
                             tappedDifficulty = false
+                            addAppSchedule = false
+                            addAppLimit = false
                         }
                     }
                 
@@ -81,12 +89,24 @@ struct MainView: View {
                     .offset(y: showModal ?  0 : UIScreen.main.bounds.height)
                 DifficultyModal(mainVM: mainVM, showDifficulty: $tappedDifficulty)
                     .offset(y: tappedDifficulty ?  (UIScreen.main.bounds.height / 2 - 172) : UIScreen.main.bounds.height)
+                UnlockModal(mainVM: mainVM, showUnlock: $showUnlock)
+                    .offset(y: showUnlock ?  (UIScreen.main.bounds.height / 2 - 172) : UIScreen.main.bounds.height)
+                AppLimitsModal(mainVM: mainVM, showAppLimits: $addAppLimit)
+                    .offset(y: addAppLimit ?  (UIScreen.main.bounds.height / 2 - 224) : UIScreen.main.bounds.height)
+                AppScheduleModal(mainVM: mainVM, showAppSession: $addAppSchedule)
+                    .offset(y: addAppSchedule ?  (UIScreen.main.bounds.height / (mainVM.selectedSchedule.isAllDay ? 5.5 : 8)) : UIScreen.main.bounds.height)
+                
             }
            .navigationBarTitle("")
             .navigationBarHidden(true)
             .sheet(isPresented: $showShop) {
                 ShopScreen(isPresented: $showShop)
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("breakTime")), perform: { _ in
+                withAnimation {
+                    showUnlock.toggle()
+                }
+            })
         } else {
             OnboardingScreen(mainVM: mainVM)
         }

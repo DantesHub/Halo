@@ -26,7 +26,7 @@ struct OnboardingScreen: View {
                     .offset(y: devilImageOffset)
                     .onAppear() {
                         withAnimation(.easeInOut(duration: 0.65)) {
-                            devilImageOffset = UIDevice.hasNotch ? -50 : -20
+                            devilImageOffset = UIDevice.hasNotch ? -65 : -20
                         }
                     }
                 HStack {
@@ -67,7 +67,7 @@ struct OnboardingScreen: View {
                         .offset(x: wingRightOffset)
                         .onAppear() {
                             withAnimation(.easeInOut(duration: 0.65)) {
-                                wingRightOffset = -32
+                                wingRightOffset = -12
                             }
                         }
                 }.font(Font.prompt(.medium, size: 40))
@@ -75,33 +75,32 @@ struct OnboardingScreen: View {
                 .lineSpacing(-8)
                 .foregroundColor(Clr.primary)
                 .offset(y: -36)
-                Img.middleAngels
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .offset(y: middleAngelsOffset)
-                    .onAppear() {
-                        withAnimation(.easeInOut(duration: 0.6 )) {
-                            middleAngelsOffset = -24
-                        }
-                        self.animateMiddle.toggle()
+                VStack {
+                    Img.middleAngels
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .offset(y: middleAngelsOffset)
+                        .onAppear() {
+                            withAnimation(.easeInOut(duration: 0.6 )) {
+                                middleAngelsOffset = -100
+                            }
+                            self.animateMiddle.toggle()
 
-                    }
-                    .offset(y: animateMiddle ? -10 : 10)
-                    .animation(Animation.easeInOut(duration: 1)
-                        .repeatForever(autoreverses: true), value: animateMiddle)
-                 
-                Img.girlStudying
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .offset(y: -64)
-                Spacer()
-                Spacer()
+                        }
+                        .offset(y: animateMiddle ? -10 : 10)
+                        .animation(Animation.easeInOut(duration: 1)
+                            .repeatForever(autoreverses: true), value: animateMiddle)
+                    Img.girlStudying
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .offset(y: -275)
+                }.frame(width: UIScreen.main.bounds.width)
                 PrimaryButton(title: "Continue") {
                     mainVM.homeScreenIsReady = true
                 }.padding(.bottom)
                 .padding(.horizontal, 32)
+                .offset(y: -225)
+
             }
             .frame(width: UIScreen.main.bounds.width)
         }

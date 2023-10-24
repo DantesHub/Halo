@@ -8,37 +8,32 @@
 import Foundation
 import Combine
 import SwiftUI
+import BackgroundTasks
+import AVFoundation
 
 class MainViewModel: ObservableObject {
-    @Published var currentPage: Page = .home
+    @Published var currentPage: Page = .rule
     @Published var homeScreenIsReady = true
     
     @Published var selectedDifficulty: Difficulty = .normal
-    
+    @Published var selectedTime: TimeSelect = .five
+
     @Published var timeRemaining: Int = 180 // 3 hours in minutes, adjust as needed
     @Published var progress: Double = 0.0 // Progress from 0.0 to 1.0
-    
+    @Published var selectedSchedule: Schedule = Schedule.templateSchedule
+    @Published var user: User = User(name: "goat", avgScreentime: "2-4", coins: 100, guardians: [], dateJoined: Date(), schedules: [], limits: [])
     private var cancellables: Set<AnyCancellable> = []
     private var timerPublisher: AnyPublisher<Date, Never>?
     var formattedTime: String {
         return secondsToHoursMinutesSeconds(seconds: timeRemaining)
     }
     
-    // Schedules
-    @Published var days: [Day] = [
-         Day(name: "S"),
-         Day(name: "M"),
-         Day(name: "T"),
-         Day(name: "W"),
-         Day(name: "T"),
-         Day(name: "F"),
-         Day(name: "S")
-     ]
-    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
+//        UserDefaults.standard.removeObject(forKey: "user")
+        user = UserDefaults.standard.retrieveUser() ?? User(name: "goat", avgScreentime: "2-4", coins: 100, guardians: [], dateJoined: Date(), schedules: [], limits: [])
     }
     
     deinit {
@@ -66,9 +61,10 @@ class MainViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+ 
     func stopFocusSession() {
-        cancellables.forEach { $0.cancel() }        }
+        cancellables.forEach { $0.cancel() }
+    }
     
     
     func secondsToHoursMinutesSeconds (seconds: Int) -> String {
@@ -80,6 +76,10 @@ class MainViewModel: ObservableObject {
         } else {
             return String(format: "%02d:%02d", minutes, seconds)
         }
+    }
+    
+    func saveData() {
+        UserDefaults.standard.updateUser(user: self.user)
     }
     
     @objc func appMovedToForeground() {
@@ -115,12 +115,8 @@ enum Page {
     case store
     case profile
     case stats
+    case rule
 }
 
 
 
-struct Day: Identifiable {
- let id = UUID()  
- let name: String
- var isSelected: Bool = true
-}

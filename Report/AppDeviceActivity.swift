@@ -1,6 +1,8 @@
 //
-//  AppDeviceActivity.swift//
-//  Created by Dante
+//  AppDeviceActivity.swift
+//  Report
+//
+//  Created by Dante Kim on 10/18/23.
 //
 
 import Foundation
@@ -28,4 +30,5 @@ extension TimeInterval{
         let hours = (time / 3600)
         return String(format: "%0.2d:%0.2d",hours,minutes)
     }
+    
 }

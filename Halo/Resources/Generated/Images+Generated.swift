@@ -27,7 +27,6 @@ public enum Img {
   public static let haloboxes9 = Image("haloboxes9")
   public static let mainHalo = Image("mainHalo")
   public static let middleAngels = Image("middleAngels")
-  public static let middleAngels2 = Image("middleAngels2")
   public static let shoppingIcon = Image("shoppingIcon")
   public static let wingLeft = Image("wingLeft")
   public static let wingRight = Image("wingRight")

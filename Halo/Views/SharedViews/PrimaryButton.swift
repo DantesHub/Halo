@@ -10,8 +10,16 @@ import SwiftUI
 struct PrimaryButton: View {
     var img: Image?
     var title: String = "Continue2"
-    var action: () -> Void
+    var isDisabled:Bool
     @State private var opacity: Double = 1
+    var action: () -> Void
+    
+    init(img: Image? = nil, title: String = "Continue2", action: @escaping () -> Void, isDisabled: Bool = false) {
+         self.img = img
+         self.title = title
+         self.action = action
+         self.isDisabled = isDisabled
+     }
     
     var body: some View {
     
@@ -32,6 +40,7 @@ struct PrimaryButton: View {
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(.white)
+                            .bold()
                     }
                 }.padding(.horizontal, 32)
             }
@@ -45,6 +54,8 @@ struct PrimaryButton: View {
                     }
                 }
             }
+            .disabled(isDisabled)
+            .opacity(isDisabled ? 0.5 : 1)
     }
 }
 
