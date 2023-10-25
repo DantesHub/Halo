@@ -11,16 +11,18 @@ import SwiftUI
 struct AppScheduleModal: View {
     @ObservedObject var mainVM: MainViewModel
     @State private var toggleBreaks: Bool = false
-    @State private var toggleAllDay: Bool = false
     @State private var showTextField: Bool = false
     @State private var sessionTitle: String = "💎 My Schedule"
     @Binding var showAppSession: Bool
+    @Binding var toggleAllDay: Bool
     @StateObject var familyViewModel = FamilyViewModel.shared
     @State private var presentFamilyPicker = false
     @State private var starts: Date = Calendar.current.date(from: DateComponents(hour: 0, minute: 0))!
     @State private var ends: Date = Calendar.current.date(from: DateComponents(hour: 23, minute: 59))!
     @State private var days: [Day] = [Day(name: "S"),Day(name: "M"), Day(name: "T"), Day(name: "W"),Day(name: "T"),Day(name: "F"),Day(name: "S")]
-    
+    var isStartTimeBeforeEndTime: Bool {
+        return starts < ends
+    }
     var isAtLeastOneDaySelected: Bool {
         return days.contains { $0.isSelected }
     }
@@ -64,10 +66,27 @@ struct AppScheduleModal: View {
                 }
 
                 Spacer()
-                Image(systemName: "xmark.circle.fill")
-                    .resizable()
-                    .frame(width: 32, height: 32)
-                    .opacity(0)
+                if mainVM.selectedSchedule.isSuggested {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                        .opacity(0)
+                } else {
+                    Image(systemName: "trash.fill")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            withAnimation {
+                                mainVM.user.schedules.removeAll(where: {$0.id == mainVM.selectedSchedule.id})
+                                      mainVM.saveData()
+                                      showAppSession.toggle()
+                                      mainVM.selectedSchedule = Schedule.templateSchedule
+                            }
+                    }
+                }
+             
             }.padding(.vertical)
             VStack(spacing: 24) {
                 VStack {
@@ -173,7 +192,7 @@ struct AppScheduleModal: View {
                                 .frame(height: 2.5)
                                 .foregroundColor(Clr.primary)
                             HStack {
-                                DatePicker("Starts", selection: $starts, displayedComponents: [.hourAndMinute])
+                                DatePicker("Starts \(!isStartTimeBeforeEndTime ? "❌ start < end" : "")", selection: $starts, displayedComponents: [.hourAndMinute])
                             }.padding(.horizontal)
                             Rectangle()
                                 .frame(height: 2.5)
@@ -210,7 +229,7 @@ struct AppScheduleModal: View {
          
             PrimaryButton(title: "Save Schedule", action: {
                 withAnimation {
-                    let saveSchedule = Schedule(title: sessionTitle, breaks: toggleBreaks, starts: starts, ends: ends, daysOfWeek: days, appsCount: familyViewModel.appsCount, categoriesCount: familyViewModel.categoriesCount)
+                    let saveSchedule = Schedule(id: mainVM.selectedSchedule.id, title: sessionTitle, breaks: toggleBreaks, starts: starts, ends: ends, daysOfWeek: days, isSuggested: false, appsCount: familyViewModel.appsCount, categoriesCount: familyViewModel.categoriesCount)
                     if mainVM.selectedSchedule.isSuggested {
                         mainVM.user.schedules.append(saveSchedule)
                     } else {
@@ -218,11 +237,14 @@ struct AppScheduleModal: View {
                             mainVM.user.schedules[index] = saveSchedule
                         }
                     }
+                    if saveSchedule.isActive {
+                        familyViewModel.blockApps()
+                    }
                     mainVM.saveData()
                     showAppSession.toggle()
                     mainVM.selectedSchedule = Schedule.templateSchedule
                 }
-            }, isDisabled: (!isAtLeastOneDaySelected || (familyViewModel.appsCount == 0 && familyViewModel.categoriesCount == 0))).padding(.bottom, 32)
+            }, isDisabled: (!isAtLeastOneDaySelected || (familyViewModel.appsCount == 0 && familyViewModel.categoriesCount == 0)) || !isStartTimeBeforeEndTime).padding(.bottom, 32)
         }.frame(height: toggleAllDay ? 526 : 640)
             .padding(.horizontal, 32)
             .foregroundColor(Clr.primary)
@@ -242,10 +264,12 @@ struct AppScheduleModal: View {
     }
     
     private func updateData() {
-        if  mainVM.selectedSchedule.title == "💎 My Schedule" || mainVM.selectedSchedule.isSuggested {
+        if  mainVM.selectedSchedule.isSuggested {
             familyViewModel.appsCount = 0
             familyViewModel.categoriesCount = 0
         } else {
+            familyViewModel.title = mainVM.selectedSchedule.id.uuidString
+            familyViewModel.schedule = mainVM.selectedSchedule
             familyViewModel.restoreBlockedApps()
         }
         sessionTitle = mainVM.selectedSchedule.title
@@ -279,7 +303,7 @@ struct DayBubble: View {
 }
 struct AppScheduleModal_Previews: PreviewProvider {
     static var previews: some View {
-        AppScheduleModal(mainVM: MainViewModel(), showAppSession: .constant(false))
+        AppScheduleModal(mainVM: MainViewModel(), showAppSession: .constant(false), toggleAllDay: .constant(true))
     }
 }
 

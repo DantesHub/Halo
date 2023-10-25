@@ -19,6 +19,7 @@ struct Constants {
     
     
     static let fontHuge: CGFloat = 72 / (UIDevice.isSmall ? 1.5 : 1)
+    static let fontBig: CGFloat = 64 / (UIDevice.isSmall ? 1.5 : 1)
     static let fontTitle: CGFloat = 48 / (UIDevice.isSmall ? 1.5 : 1)
     static let fontXLarge: CGFloat = 32 / (UIDevice.isSmall ? 1.5 : 1)
     static let fontLarge: CGFloat = 24 / (UIDevice.isSmall ? 1.5 : 1)

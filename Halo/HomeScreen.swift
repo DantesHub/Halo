@@ -14,6 +14,10 @@ struct HomeScreen: View {
     @StateObject var familyModel = FamilyViewModel.shared
     @State private var animateBox = false
     @State var isPresented = false
+    @State private var title = ""
+    @State private var activeSchedule: Schedule = Schedule.templateSchedule
+    @Binding var addAppSchedule: Bool
+    @Binding var showUnlock: Bool
     
     var body: some View {
         GeometryReader { g in
@@ -25,11 +29,11 @@ struct HomeScreen: View {
                             RoundedRectangle(cornerRadius: 32)
                                 .frame(height:44)
                             HStack() {
-                                Text("Start Focus Session")
+                                Text(title == "" ? "Start Focus Session" : title)
                                     .foregroundColor(.white)
                                     .font(Font.prompt(.medium, size: 20))
                                 Spacer()
-                                Image(systemName: "play.fill")
+                                Image(systemName: title == ""  ? "play.fill" : "pause.fill")
                                     .resizable()
                                     .foregroundColor(Color.white)
                                     .frame(width: 20, height: 20)
@@ -78,14 +82,21 @@ struct HomeScreen: View {
                                     .foregroundColor(Clr.primary)
                                     .font(Font.prompt(.medium, size: 16))
                                 Text("\(mainVM.formattedTime)")
-                                    .font(Font.prompt(.bold, size: Constants.fontHuge))
+                                    .font(Font.prompt(.bold, size: Constants.fontBig))
                                     .foregroundColor(Clr.primary)
+                                
                                 HStack {
                                     Rectangle()
                                         .fill(Clr.primarySecond)
                                         .frame(width: g.size.width * mainVM.progress, height: 16, alignment: .leading)
                                         .animation(.linear, value: mainVM.progress)
                                 }.frame(width: g.size.width / 1.2, alignment: .leading)
+                            }
+                        }
+                        ScheduleCard(schedule: activeSchedule, showUnlock: $showUnlock, mainVM: mainVM)  {
+                            withAnimation {
+                                mainVM.selectedSchedule = activeSchedule
+                                addAppSchedule.toggle()
                             }
                         }
                         
@@ -151,19 +162,31 @@ struct HomeScreen: View {
                     }.padding(.horizontal, Constants.paddingXL)
                 }
             }
-        }.onAppear {}
+        }.onAppear {
+            updateData()
+        }
             .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
-
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .padding(.horizontal, Constants.paddingStandard)
-//            .padding(.vertical, Constants.paddingSmall)
-//
-        
+            .onChange(of: mainVM.user.schedules) { newValue in
+                if !newValue.isEmpty { updateData() }
+            }
+    
+    }
+    func updateData() {
+        for schedule in mainVM.user.schedules {
+            if schedule.isActive && schedule.isOn {
+                title = schedule.title
+                mainVM.startFocusSession()
+                activeSchedule = schedule
+                break
+            } else if schedule.isActive {
+                activeSchedule = schedule
+            }
+        }
     }
 }
-
+    
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen(mainVM: MainViewModel(), homeVM: HomeViewModel(mainViewModel: MainViewModel()))
+        HomeScreen(mainVM: MainViewModel(), homeVM: HomeViewModel(mainViewModel: MainViewModel()), addAppSchedule: .constant(false), showUnlock: .constant(false))
     }
 }

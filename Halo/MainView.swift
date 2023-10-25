@@ -20,6 +20,7 @@ struct MainView: View {
     @State private var showUnlock: Bool = false
     @State private var addAppLimit: Bool = false
     @State private var addAppSchedule: Bool = false
+    @State private var toggleAllDay: Bool = true
 
     
     init(mainViewModel: MainViewModel) {
@@ -58,20 +59,20 @@ struct MainView: View {
                         Color.white.ignoresSafeArea()
                         switch mainVM.currentPage {
                             case .home:
-                                HomeScreen(mainVM: mainVM, homeVM: homeVM)
+                            HomeScreen(mainVM: mainVM, homeVM: homeVM, addAppSchedule: $addAppSchedule, showUnlock: $showUnlock)
                                     .environmentObject(homeVM)
                             case .store:
                                 EmptyView()
                             case .rule:
-                                RulesScreen(mainVM: mainVM, addAppLimit: $addAppLimit, addAppSchedule: $addAppSchedule)
-                            default: HomeScreen(mainVM: mainVM, homeVM: homeVM)
+                            RulesScreen(mainVM: mainVM, addAppLimit: $addAppLimit, addAppSchedule: $addAppSchedule, showUnlock:$showUnlock)
+                            default: EmptyView()
                         }
                     }
                     TabBar(mainVM: mainVM, tappedPlus: $tappedPlus)
 
                 }
             
-                Color.black.opacity(tappedPlus || showModal || addAppSchedule || addAppLimit ? 0.5 : 0)
+                Color.black.opacity(tappedPlus || showModal || showUnlock || addAppSchedule || addAppLimit ? 0.5 : 0)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
@@ -90,14 +91,13 @@ struct MainView: View {
                 DifficultyModal(mainVM: mainVM, showDifficulty: $tappedDifficulty)
                     .offset(y: tappedDifficulty ?  (UIScreen.main.bounds.height / 2 - 172) : UIScreen.main.bounds.height)
                 UnlockModal(mainVM: mainVM, showUnlock: $showUnlock)
-                    .offset(y: showUnlock ?  (UIScreen.main.bounds.height / 2 - 172) : UIScreen.main.bounds.height)
+                    .offset(y: showUnlock ?  (UIScreen.main.bounds.height / 2 - 200) : UIScreen.main.bounds.height)
                 AppLimitsModal(mainVM: mainVM, showAppLimits: $addAppLimit)
                     .offset(y: addAppLimit ?  (UIScreen.main.bounds.height / 2 - 224) : UIScreen.main.bounds.height)
-                AppScheduleModal(mainVM: mainVM, showAppSession: $addAppSchedule)
-                    .offset(y: addAppSchedule ?  (UIScreen.main.bounds.height / (mainVM.selectedSchedule.isAllDay ? 5.5 : 8)) : UIScreen.main.bounds.height)
+                AppScheduleModal(mainVM: mainVM, showAppSession: $addAppSchedule, toggleAllDay: $toggleAllDay)
+                    .offset(y: addAppSchedule ?  (UIScreen.main.bounds.height / (toggleAllDay ? 5.5 : 8)) : UIScreen.main.bounds.height)
                 
-            }
-           .navigationBarTitle("")
+            }.navigationBarTitle("")
             .navigationBarHidden(true)
             .sheet(isPresented: $showShop) {
                 ShopScreen(isPresented: $showShop)

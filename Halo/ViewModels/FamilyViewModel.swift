@@ -15,9 +15,12 @@ class FamilyViewModel: ObservableObject {
     let store = ManagedSettingsStore()
     
     @Published var title: String = ""
+    @Published var schedule: Schedule = Schedule.templateSchedule
     @Published var appsCount: Int = 0
     @Published var categoriesCount: Int = 0
-
+    @Published var applicationsBlocked: Set<ApplicationToken>?
+    @Published var categoriesBlocked: ShieldSettings.ActivityCategoryPolicy<Application>?
+    @Published var breakTimeLeft: Int = 0
     private init() {
         // multiple limits
         // multiple schedules
@@ -58,20 +61,18 @@ class FamilyViewModel: ObservableObject {
 //    var focusSelectionToDiscourage = FamilyActivitySelection() {
 //        
 //    }
+    func blockApps() {
+        store.shield.applications = applicationsBlocked
+        store.shield.applicationCategories = categoriesBlocked
+    }
     
     var selectionToDiscourage = FamilyActivitySelection() {
         willSet {
             let applications = newValue.applicationTokens
             let categories = newValue.categoryTokens
             
-            if title == "focus" {
-                store.shield.applications = applications.isEmpty ? nil : applications
-                store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
-            } else {
-                // if schedule is right now or if user has surpassed their limit.
-                // Or should i just make the limit starting now.
-                // add up all of the applications time
-            }
+            applicationsBlocked = applications.isEmpty ? nil : applications
+            categoriesBlocked = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
            
             
             // Save to UserDefaults
@@ -82,7 +83,6 @@ class FamilyViewModel: ObservableObject {
             if let encodedApps = try? encoder.encode(Array(applications)) {
                 sharedDefaults?.set(encodedApps, forKey: title + "BlockedApps")
                 appsCount = applications.count
-                print("1. Saved apps to UserDefaults.")
             } else {
                 print("Failed to encode apps.")
             }
@@ -91,11 +91,12 @@ class FamilyViewModel: ObservableObject {
             if let encodedCategoryTokens = try? encoder.encode(Array(categories)) {
                 sharedDefaults?.set(encodedCategoryTokens, forKey: title + "BlockedCategories")
                 categoriesCount = categories.count
-                print("2. Saved category tokens to UserDefaults.")
             } else {
                 print("Failed to encode category tokens.")
             }
         }
+        
+        
     }
 
     
@@ -141,12 +142,12 @@ class FamilyViewModel: ObservableObject {
         var timer: Timer?
         
         let seconds = minutes * 60
-        
+        breakTimeLeft = seconds
         // Timer
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] (t) in
             timePassed += 1
+            breakTimeLeft -= 1
             if timePassed >= seconds {
-                print("calling here")
                 // Cancel the timer after blocking time elapsed
                 
                 // stop playing

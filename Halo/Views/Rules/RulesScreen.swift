@@ -12,11 +12,14 @@ struct RulesScreen: View {
     @State private var showSchedules = 0
     @Binding var addAppLimit: Bool
     @Binding var addAppSchedule: Bool
-
+    @Binding var showUnlock: Bool
+    @State private var suggestedSchedules: [Schedule] = []
+    @State private var todaySchedules: [Schedule] = []
+    
     var body: some View {
         // TODO: trigger session if time and day is right now.
         ZStack {
-            VStack(spacing: 12) {
+            VStack(spacing: 0) {
                 TwoOptionMenu(selectedOption: $showSchedules, options: [MenuOption(title: "Schedules", action: {
                     showSchedules = 0
                 }), MenuOption(title: "Limits", action: {
@@ -33,7 +36,7 @@ struct RulesScreen: View {
                             .padding(.horizontal, Constants.paddingLarge)
                         ScrollView(showsIndicators: false) {
                             VStack(alignment: .leading, spacing: 8) {
-                                if !mainVM.user.schedules.isEmpty {
+                                if !todaySchedules.isEmpty {
                                     Text("Today")
                                         .font(Font.prompt(.medium, size: 20))
                                         .foregroundColor(Color.black.opacity(0.5))
@@ -43,19 +46,33 @@ struct RulesScreen: View {
                                     //ScheduleCard(title: "💎 My Schedule", isActive: true)
                                 }
                                 
-                                ForEach(Array(mainVM.user.schedules.reversed().enumerated()), id: \.element.id) { index, schedule in                                    ScheduleCard(schedule: schedule) {
+                                ForEach(Array(todaySchedules.reversed().enumerated()), id: \.element.id) { index, schedule in                                    ScheduleCard(schedule: schedule, showUnlock: $showUnlock, mainVM: mainVM) {
                                         withAnimation {
                                             mainVM.selectedSchedule = schedule
                                             addAppSchedule.toggle()
                                         }
                                     }.padding(.top, index == 0 ? 0 : 12)
                                 }
+                                if !suggestedSchedules.isEmpty {
+                                    Text("Upcoming")
+                                        .font(Font.prompt(.medium, size: 20))
+                                        .foregroundColor(Color.black.opacity(0.5))
+                                        .padding(.top)
+                                }
+                                ForEach(Array(suggestedSchedules.reversed().enumerated()), id: \.element.id) { index, schedule in                                    ScheduleCard(schedule: schedule, showUnlock: $showUnlock, mainVM: mainVM) {
+                                        withAnimation {
+                                            mainVM.selectedSchedule = schedule
+                                            addAppSchedule.toggle()
+                                        }
+                                    }.padding(.top, index == 0 ? 0 : 12)
+                                }
+                                
                                 Text("Suggested")
                                     .font(Font.prompt(.medium, size: 20))
                                     .foregroundColor(Color.black.opacity(0.5))
                                     .padding(.top)
                                 ForEach(Schedule.suggestedSchedules)   { schedule in
-                                    ScheduleCard(schedule: schedule) {
+                                    ScheduleCard(schedule: schedule, showUnlock: $showUnlock, mainVM: mainVM) {
                                         withAnimation {
                                             mainVM.selectedSchedule = schedule
                                             addAppSchedule.toggle()
@@ -63,8 +80,7 @@ struct RulesScreen: View {
                                     }
                                 }
                             }.padding(.horizontal, Constants.paddingLarge)
-                        }
-                        .cornerRadius(12)
+                        }.cornerRadius(12)
                     }.foregroundColor(Clr.primary)
                 } else {
                     PrimaryButton(img: Image(systemName: "plus"), title: "Add App Limit") {
@@ -88,11 +104,23 @@ struct RulesScreen: View {
                 Spacer()
             }
         }
+        .onChange(of: mainVM.user.schedules) { newValue in
+            if !newValue.isEmpty { updateData() }
+        }
+        .onAppear {
+            updateData()
+        }
+        
+    }
+    func updateData() {
+        todaySchedules = mainVM.user.schedules.filter({ $0.isToday })
+        print("updating data rn", todaySchedules[0].isOn)
+        suggestedSchedules = mainVM.user.schedules.filter({ !$0.isToday })
     }
 }
 
 #Preview {
-    RulesScreen(mainVM: MainViewModel(), addAppLimit: .constant(false), addAppSchedule: .constant(false))
+    RulesScreen(mainVM: MainViewModel(), addAppLimit: .constant(false), addAppSchedule: .constant(false), showUnlock: .constant(false))
 }
 
 struct LimitCard: View {
@@ -222,7 +250,11 @@ struct LimitCard: View {
 }
 struct ScheduleCard: View {
     var schedule: Schedule
+    @Binding var showUnlock: Bool
+    @ObservedObject var mainVM: MainViewModel
     var action: () -> ()
+    @ObservedObject var familyViewModel = FamilyViewModel.shared
+    @State private var isOn: Bool = true
 
     
     var body: some View {
@@ -235,16 +267,31 @@ struct ScheduleCard: View {
                             .foregroundColor(Clr.primary)
                         Spacer()
                         if schedule.isActive {
-                            Capsule()
-                                .fill(Clr.primarySecond.opacity(0.5))
-                                .overlay(
-                                    HStack {
-                                        Text("Active")
-                                            .font(Font.prompt(.medium, size: 16))
-                                            .foregroundColor(Clr.primary)
-                                    }
-                                )
+                            Toggle("", isOn: $isOn)
+                                .tint(Clr.primarySecond)
                                 .frame(width: 72, height: 32)
+                                .onChange(of: isOn) { newValue in
+                                    if let index = mainVM.user.schedules.firstIndex(where: { $0.id == schedule.id}) {
+                                            var sched = schedule
+                                            sched.isOn = newValue
+                                           mainVM.user.schedules[index] = sched
+                                        mainVM.saveData()
+                                       }
+                                    
+                                    if newValue == false && schedule.isActive {
+                                        mainVM.stopFocusSession()
+                                        mainVM.timeRemaining = 0
+                                    }
+                                }
+//                            Capsule()
+//                                .fill(Clr.primarySecond.opacity(0.5))
+//                                .overlay(
+//                                    HStack {
+//                                        Text("Active")
+//                                            .font(Font.prompt(.medium, size: 16))
+//                                            .foregroundColor(Clr.primary)
+//                                    }
+//                                )
                         } else if schedule.isSuggested {
                             Capsule()
                                 .fill(Clr.primary)
@@ -307,7 +354,7 @@ struct ScheduleCard: View {
                             }
                         }
                         Spacer()
-                        if schedule.isActive  {
+                        if schedule.isActive && isOn  {
                             Capsule()
                                 .fill(Clr.primary)
                                 .overlay(
@@ -316,11 +363,17 @@ struct ScheduleCard: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 10)
-                                        Text("Take a break")
+                                        Text(familyViewModel.breakTimeLeft > 0 ?  familyViewModel.breakTimeLeft.convertToTimeLeft() : "Take a break")
                                             .font(Font.prompt(.medium, size: 16))
                                     }.foregroundColor(.white)
                                 )
                                 .frame(width: 156, height: 32)
+                                .onTapGesture {
+                                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                    withAnimation {
+                                        showUnlock.toggle()
+                                    }
+                                }
                         }
                     }.foregroundColor(Color.black.opacity(0.5))
                 } else {
@@ -330,9 +383,16 @@ struct ScheduleCard: View {
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .padding(.horizontal, 32)
-        }.onTapGesture {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            action()
-        }
+        }.opacity(isOn ? 1 : 0.5)
+            .onTapGesture {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                action()
+            }
+            .onChange(of: schedule) { newSchedule in
+                isOn = newSchedule.isOn
+            }
+            .onAppear {
+                isOn = schedule.isOn
+            }
     }
 }

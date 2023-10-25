@@ -12,13 +12,13 @@ import BackgroundTasks
 import AVFoundation
 
 class MainViewModel: ObservableObject {
-    @Published var currentPage: Page = .rule
+    @Published var currentPage: Page = .home
     @Published var homeScreenIsReady = true
     
     @Published var selectedDifficulty: Difficulty = .normal
     @Published var selectedTime: TimeSelect = .five
-
-    @Published var timeRemaining: Int = 180 // 3 hours in minutes, adjust as needed
+    @Published var isTimerRunning: Bool = false
+    @Published var timeRemaining: Int = 180
     @Published var progress: Double = 0.0 // Progress from 0.0 to 1.0
     @Published var selectedSchedule: Schedule = Schedule.templateSchedule
     @Published var user: User = User(name: "goat", avgScreentime: "2-4", coins: 100, guardians: [], dateJoined: Date(), schedules: [], limits: [])
@@ -28,6 +28,11 @@ class MainViewModel: ObservableObject {
         return secondsToHoursMinutesSeconds(seconds: timeRemaining)
     }
     
+
+    
+    
+    
+    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -35,6 +40,7 @@ class MainViewModel: ObservableObject {
 //        UserDefaults.standard.removeObject(forKey: "user")
         user = UserDefaults.standard.retrieveUser() ?? User(name: "goat", avgScreentime: "2-4", coins: 100, guardians: [], dateJoined: Date(), schedules: [], limits: [])
     }
+    
     
     deinit {
         stopFocusSession()
@@ -44,6 +50,35 @@ class MainViewModel: ObservableObject {
     
     
     func startFocusSession() {
+        if isTimerRunning { return } // If the timer is already running, return immediately
+        
+        for schedule in user.schedules {
+            if schedule.isActive && schedule.isOn {
+                let calendar = Calendar.current
+                let now = Date()
+                let ends = schedule.ends
+                let currentHour = calendar.component(.hour, from: now)
+                let currentMinute = calendar.component(.minute, from: now)
+
+                let endHour = calendar.component(.hour, from: ends)
+                let endMinute = calendar.component(.minute, from: ends)
+
+                // Convert everything to minutes for easier comparison
+                let currentTimeInMinutes = currentHour * 60 + currentMinute
+                let endTimeInMinutes = endHour * 60 + endMinute
+
+                if currentTimeInMinutes < endTimeInMinutes {
+                    let minutesLeft = endTimeInMinutes - currentTimeInMinutes
+                    let timeIntervalLeft: TimeInterval = TimeInterval(minutesLeft * 60) // Convert minutes to seconds
+                    timeRemaining = Int(timeIntervalLeft)
+                    print("\(timeIntervalLeft) seconds left")
+                } else {
+                    print("The schedule has ended for today.")
+                 
+                }
+            }
+        }
+        
         UserDefaults.standard.set(Date(), forKey: "startTime")
         timerPublisher = Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
@@ -57,13 +92,16 @@ class MainViewModel: ObservableObject {
                     self.progress = Double(self.timeRemaining) / (UIScreen.main.bounds.width / 2)
                 } else {
                     self.cancellables.forEach { $0.cancel() }
+                    self.isTimerRunning = false
                 }
             }
             .store(in: &cancellables)
+        isTimerRunning = true
     }
  
     func stopFocusSession() {
         cancellables.forEach { $0.cancel() }
+        isTimerRunning = false
     }
     
     
@@ -78,6 +116,7 @@ class MainViewModel: ObservableObject {
         }
     }
     
+    
     func saveData() {
         UserDefaults.standard.updateUser(user: self.user)
     }
@@ -91,15 +130,15 @@ class MainViewModel: ObservableObject {
     }
     
     @objc func appMovedToBackground() {
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "Timer Done!"
-        notificationContent.body = "Your timer has finished."
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeRemaining), repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "timerDone", content: notificationContent, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//        let notificationContent = UNMutableNotificationContent()
+//        notificationContent.title = "Timer Done!"
+//        notificationContent.body = "Your timer has finished."
+//        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeRemaining), repeats: false)
+//        
+//        let request = UNNotificationRequest(identifier: "timerDone", content: notificationContent, trigger: trigger)
+//        
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     @objc func appWillTerminate() {
