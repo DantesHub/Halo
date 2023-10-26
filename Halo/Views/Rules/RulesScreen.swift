@@ -114,7 +114,6 @@ struct RulesScreen: View {
     }
     func updateData() {
         todaySchedules = mainVM.user.schedules.filter({ $0.isToday })
-        print("updating data rn", todaySchedules[0].isOn)
         suggestedSchedules = mainVM.user.schedules.filter({ !$0.isToday })
     }
 }
@@ -255,7 +254,7 @@ struct ScheduleCard: View {
     var action: () -> ()
     @ObservedObject var familyViewModel = FamilyViewModel.shared
     @State private var isOn: Bool = true
-
+    @State private var showAlert = false
     
     var body: some View {
         BoxCard(size: schedule.isActive ? 5.5 : schedule.isSuggested ? 4.5 : 6) {
@@ -267,22 +266,36 @@ struct ScheduleCard: View {
                             .foregroundColor(Clr.primary)
                         Spacer()
                         if schedule.isActive {
-                            Toggle("", isOn: $isOn)
-                                .tint(Clr.primarySecond)
-                                .frame(width: 72, height: 32)
-                                .onChange(of: isOn) { newValue in
-                                    if let index = mainVM.user.schedules.firstIndex(where: { $0.id == schedule.id}) {
+                            ZStack {
+                                Toggle("", isOn: $isOn)
+                                    .tint(Clr.primarySecond)
+                                    .frame(width: 72, height: 32)
+                                    .allowsHitTesting(false)
+                                    .onChange(of: isOn) { newValue in}
+
+                                Button(action: {
+                                    if isOn {
+                                        showAlert = true
+                                    } else { // isOn == false, turning On
+                                        isOn = true
+                                        if let index = mainVM.user.schedules.firstIndex(where: { $0.id == schedule.id}) {
                                             var sched = schedule
-                                            sched.isOn = newValue
-                                           mainVM.user.schedules[index] = sched
-                                        mainVM.saveData()
-                                       }
-                                    
-                                    if newValue == false && schedule.isActive {
-                                        mainVM.stopFocusSession()
-                                        mainVM.timeRemaining = 0
+                                            sched.isOn = true
+                                            if sched.isActive {
+                                                familyViewModel.title = sched.id.uuidString
+                                                familyViewModel.restoreBlockedApps()
+                                                familyViewModel.blockApps()
+                                            }
+                                            mainVM.user.schedules[index] = sched
+                                            mainVM.saveData()
+                                        }
                                     }
+                                }) {
+                                    Rectangle() // Example
+                                        .fill(.clear)
+                                        .frame(width: 72, height: 32)
                                 }
+                            }
 //                            Capsule()
 //                                .fill(Clr.primarySecond.opacity(0.5))
 //                                .overlay(
@@ -393,6 +406,24 @@ struct ScheduleCard: View {
             }
             .onAppear {
                 isOn = schedule.isOn
+            }.alert(isPresented: $showAlert) {
+                Alert(title: Text("Are you sure?"),
+                      message: Text("You will lose any coins, you gained so far in the seession. Try taking a break instead"),
+                      primaryButton: .destructive(Text("Turn Off")) {
+                            isOn = false
+                            if let index = mainVM.user.schedules.firstIndex(where: { $0.id == schedule.id}) {
+                                var sched = schedule
+                                sched.isOn = false
+                                if sched.isActive {
+                                    familyViewModel.unblockApps()
+                                }
+                                mainVM.user.schedules[index] = sched
+                                mainVM.saveData()
+                            }
+                            mainVM.stopFocusSession()
+                            mainVM.timeRemaining = 0
+                      },
+                      secondaryButton: .cancel())
             }
     }
 }

@@ -15,10 +15,10 @@
 		<string>Promt-Regular.ttf</string>
 		<string>Prompt-Bold.ttf</string>
 	</array>
-	<key>EXAppExtensionAttributes</key>
+	<key>NSExtension</key>
 	<dict>
-		<key>EXExtensionPointIdentifier</key>
-		<string>com.apple.deviceactivityui.report-extension</string>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
 	</dict>
 </dict>
 </plist>

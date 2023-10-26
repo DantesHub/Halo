@@ -7,6 +7,11 @@
 
 import SwiftUI
 import FamilyControls
+import DeviceActivity
+
+extension DeviceActivityReport.Context {
+    static let totalActivity = Self("pieChart")
+}
 
 struct HomeScreen: View {
     @ObservedObject var mainVM: MainViewModel
@@ -18,7 +23,17 @@ struct HomeScreen: View {
     @State private var activeSchedule: Schedule = Schedule.templateSchedule
     @Binding var addAppSchedule: Bool
     @Binding var showUnlock: Bool
-    
+    @State private var context: DeviceActivityReport.Context = .totalActivity
+    @State private var filter = DeviceActivityFilter(
+        segment: .daily(
+            during: Calendar.current.dateInterval(
+                of: .day, for: .now
+            )!
+        ),
+        users: .all,
+        devices: .init([.iPhone])
+    )
+
     var body: some View {
         GeometryReader { g in
             Clr.primaryBackground.ignoresSafeArea()
@@ -78,11 +93,11 @@ struct HomeScreen: View {
                                     .onAppear() {
                                         self.animateBox.toggle()
                                     }
-                                Text("Time Remaining: ")
+                                Text(mainVM.isBreakTime ? "Break Time:" : "Time Remaining: ")
                                     .foregroundColor(Clr.primary)
                                     .font(Font.prompt(.medium, size: 16))
                                 Text("\(mainVM.formattedTime)")
-                                    .font(Font.prompt(.bold, size: Constants.fontBig))
+                                    .font(Font.prompt(.bold, size: Constants.fontBig / (UIDevice.isSmall ? 1.5 : 1)))
                                     .foregroundColor(Clr.primary)
                                 
                                 HStack {
@@ -99,7 +114,6 @@ struct HomeScreen: View {
                                 addAppSchedule.toggle()
                             }
                         }
-                        
                         BoxCard(size: BoxSize.small.rawValue) {
                             VStack(alignment: .leading, spacing: -8){
                                 Text("Total Screentime 📱")
@@ -114,32 +128,9 @@ struct HomeScreen: View {
                             }.padding(.horizontal, Constants.paddingLarge)
                                 .frame(width: g.size.width / 1.2, alignment: .leading)
                         }
-                        HStack(spacing: 16) {
-                            BoxCard(size: BoxSize.small.rawValue) {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    VStack(spacing: -4) {
-                                        Text("Difficulty")
-                                            .foregroundColor(Clr.primaryThird)
-                                            .font(Font.prompt(.medium, size: Constants.fontMedium))
-                                        Text("Normal")
-                                            .foregroundColor(Clr.primary)
-                                            .font(Font.prompt(.bold, size: Constants.fontLarge))
-                                    }.frame(maxWidth: .infinity, alignment: .leading)
-                                    BlueArrow()
-                                }.padding(.horizontal, Constants.paddingMedium)
-                                
-                            }
-                            BoxCard(size: BoxSize.small.rawValue) {
-                                VStack(alignment: .leading, spacing: -4) {
-                                    Text("Pickups 🤳")
-                                        .font(Font.prompt(.medium, size: Constants.fontMedium))
-                                    Text("32")
-                                        .font(Font.prompt(.bold, size: Constants.fontTitle))
-                                }.foregroundColor(Clr.primary)
-                                    .padding(.horizontal, Constants.paddingMedium)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                        }
+                        BoxCard(size: BoxSize.small.rawValue) {
+                            DeviceActivityReport(context, filter: filter)
+                        }.frame(width: g.size.width / 1.2, alignment: .leading)
                         BoxCard(size: BoxSize.small.rawValue) {
                             VStack(alignment: .leading, spacing: 0){
                                 Text("Upcoming Schedule")
@@ -157,19 +148,22 @@ struct HomeScreen: View {
                                 }
 
                             }.padding(.horizontal, Constants.paddingLarge)
-                                .frame(width: g.size.width / 1.2, alignment: .leading)
+                            .frame(width: g.size.width / 1.2, alignment: .leading)
                         }
                     }.padding(.horizontal, Constants.paddingXL)
                 }
             }
         }.onAppear {
             updateData()
+            let sharedDefaults = UserDefaults(suiteName: "group.io.nora.deviceActivity")
+            let data = sharedDefaults?.object(forKey: "totalActivity")
+            print(data, "westside")
         }
-            .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
-            .onChange(of: mainVM.user.schedules) { newValue in
-                if !newValue.isEmpty { updateData() }
-            }
-    
+        .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)
+        .onChange(of: mainVM.user.schedules) { newValue in
+            if !newValue.isEmpty { updateData() }
+        }
+        
     }
     func updateData() {
         for schedule in mainVM.user.schedules {

@@ -30,6 +30,62 @@
 		882213452AA3E58500F59F11 /* AverageScreentime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882213442AA3E58500F59F11 /* AverageScreentime.swift */; };
 		882EF0772ACCB18900B3B2CE /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EF0762ACCB18900B3B2CE /* LottieView.swift */; };
 		882EF07A2ACCB42F00B3B2CE /* ShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882EF0792ACCB42F00B3B2CE /* ShopScreen.swift */; };
+		8831CF032AE97E0500ADF9BA /* ScheduleSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831CF022AE97E0500ADF9BA /* ScheduleSuccess.swift */; };
+		8831CF052AE98E6200ADF9BA /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831CF042AE98E6200ADF9BA /* NotificationHelper.swift */; };
+		8831CF062AEAD8BF00ADF9BA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC3D2A9FE8A8007263DA /* Constants.swift */; };
+		8831CF072AEAD8D300ADF9BA /* BoxCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC4D2AA1311C007263DA /* BoxCard.swift */; };
+		8831CF082AEAD8E300ADF9BA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888903E32A9EC89E00F4FADA /* Colors.xcassets */; };
+		8831CF092AEAD8F000ADF9BA /* Colors+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC1D2A9FC152007263DA /* Colors+Generated.swift */; };
+		8831CF0A2AEAD8FF00ADF9BA /* BlueArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881DD9992AA3B123006B3DBB /* BlueArrow.swift */; };
+		8831CF0C2AEAD92D00ADF9BA /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC1E2A9FC152007263DA /* Fonts+Generated.swift */; };
+		8831CF0D2AEAD93300ADF9BA /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
+		8831CF0E2AEAD93800ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
+		8831CF0F2AEAD93B00ADF9BA /* Prompt-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC452A9FEFDC007263DA /* Prompt-ExtraBold.ttf */; };
+		8831CF102AEAD93F00ADF9BA /* Prompt-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC452A9FEFDC007263DA /* Prompt-ExtraBold.ttf */; };
+		8831CF112AEAD93F00ADF9BA /* Prompt-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC452A9FEFDC007263DA /* Prompt-ExtraBold.ttf */; };
+		8831CF122AEAD94200ADF9BA /* Prompt-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC452A9FEFDC007263DA /* Prompt-ExtraBold.ttf */; };
+		8831CF132AEAD94800ADF9BA /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
+		8831CF142AEAD94800ADF9BA /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
+		8831CF152AEAD94900ADF9BA /* Prompt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9912AA181EA006B3DBB /* Prompt-SemiBold.ttf */; };
+		8831CF162AEAD94F00ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
+		8831CF172AEAD95000ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
+		8831CF182AEAD95000ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881DD9922AA181EA006B3DBB /* Prompt-SemiBoldItalic.ttf */; };
+		8831CF192AEAD95500ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC462A9FEFDD007263DA /* Prompt-ExtraBoldItalic.ttf */; };
+		8831CF1A2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC462A9FEFDD007263DA /* Prompt-ExtraBoldItalic.ttf */; };
+		8831CF1B2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC462A9FEFDD007263DA /* Prompt-ExtraBoldItalic.ttf */; };
+		8831CF1C2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC462A9FEFDD007263DA /* Prompt-ExtraBoldItalic.ttf */; };
+		8831CF1D2AEAD95A00ADF9BA /* Prompt-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC4B2A9FF010007263DA /* Prompt-Italic.ttf */; };
+		8831CF1E2AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC4B2A9FF010007263DA /* Prompt-Italic.ttf */; };
+		8831CF1F2AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC4B2A9FF010007263DA /* Prompt-Italic.ttf */; };
+		8831CF202AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC4B2A9FF010007263DA /* Prompt-Italic.ttf */; };
+		8831CF212AEAD95F00ADF9BA /* Prompt-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC492A9FEFE9007263DA /* Prompt-BoldItalic.ttf */; };
+		8831CF222AEAD95F00ADF9BA /* Prompt-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC492A9FEFE9007263DA /* Prompt-BoldItalic.ttf */; };
+		8831CF232AEAD96000ADF9BA /* Prompt-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC492A9FEFE9007263DA /* Prompt-BoldItalic.ttf */; };
+		8831CF242AEAD96000ADF9BA /* Prompt-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC492A9FEFE9007263DA /* Prompt-BoldItalic.ttf */; };
+		8831CF252AEAD96900ADF9BA /* Prompt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC402A9FEFC4007263DA /* Prompt-Medium.ttf */; };
+		8831CF262AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC402A9FEFC4007263DA /* Prompt-Medium.ttf */; };
+		8831CF272AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC402A9FEFC4007263DA /* Prompt-Medium.ttf */; };
+		8831CF282AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC402A9FEFC4007263DA /* Prompt-Medium.ttf */; };
+		8831CF292AEAD96E00ADF9BA /* Prompt-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC3F2A9FEFC3007263DA /* Prompt-MediumItalic.ttf */; };
+		8831CF2A2AEAD96E00ADF9BA /* Prompt-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC3F2A9FEFC3007263DA /* Prompt-MediumItalic.ttf */; };
+		8831CF2B2AEAD96F00ADF9BA /* Prompt-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC3F2A9FEFC3007263DA /* Prompt-MediumItalic.ttf */; };
+		8831CF2C2AEAD96F00ADF9BA /* Prompt-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88A5AC3F2A9FEFC3007263DA /* Prompt-MediumItalic.ttf */; };
+		8831CF2D2AEAD97300ADF9BA /* Prompt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */; };
+		8831CF2E2AEAD97300ADF9BA /* Prompt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */; };
+		8831CF302AEAD97500ADF9BA /* Prompt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */; };
+		8831CF312AEAD97500ADF9BA /* Prompt-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C82A9ECD2E008E13F3 /* Prompt-Bold.ttf */; };
+		8831CF322AEAD97A00ADF9BA /* Prompt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */; };
+		8831CF332AEAD97B00ADF9BA /* Prompt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */; };
+		8831CF342AEAD97B00ADF9BA /* Prompt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */; };
+		8831CF352AEAD97C00ADF9BA /* Prompt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */; };
+		8831CF362AEAD97C00ADF9BA /* Prompt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 886291C72A9ECD0C008E13F3 /* Prompt-Regular.ttf */; };
+		8831CF372AEAD99E00ADF9BA /* ShadowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC292A9FDDBC007263DA /* ShadowViewModifier.swift */; };
+		8831CF382AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC292A9FDDBC007263DA /* ShadowViewModifier.swift */; };
+		8831CF392AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC292A9FDDBC007263DA /* ShadowViewModifier.swift */; };
+		8831CF3A2AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC292A9FDDBC007263DA /* ShadowViewModifier.swift */; };
+		8831CF3B2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC1E2A9FC152007263DA /* Fonts+Generated.swift */; };
+		8831CF3C2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC1E2A9FC152007263DA /* Fonts+Generated.swift */; };
+		8831CF3D2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5AC1E2A9FC152007263DA /* Fonts+Generated.swift */; };
 		8856AE4F2A9AAB3A008D5403 /* HaloApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */; };
 		8856AE512A9AAB3A008D5403 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856AE502A9AAB3A008D5403 /* MainView.swift */; };
 		8856AE532A9AAB3D008D5403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8856AE522A9AAB3D008D5403 /* Assets.xcassets */; };
@@ -57,6 +113,14 @@
 		888903E62A9EC8AE00F4FADA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888903E52A9EC8AE00F4FADA /* Images.xcassets */; };
 		889492B82AE60B1000630CBF /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492B72AE60B1000630CBF /* RulesViewModel.swift */; };
 		889492BA2AE6C61100630CBF /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492B92AE6C61100630CBF /* TypeExtensions.swift */; };
+		889492C12AE9613600630CBF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889492C02AE9613600630CBF /* WidgetKit.framework */; };
+		889492C32AE9613600630CBF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889492C22AE9613600630CBF /* SwiftUI.framework */; };
+		889492C62AE9613600630CBF /* HaloWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492C52AE9613600630CBF /* HaloWidgetBundle.swift */; };
+		889492C82AE9613600630CBF /* HaloWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492C72AE9613600630CBF /* HaloWidgetLiveActivity.swift */; };
+		889492CA2AE9613600630CBF /* HaloWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492C92AE9613600630CBF /* HaloWidget.swift */; };
+		889492CC2AE9613600630CBF /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889492CB2AE9613600630CBF /* AppIntent.swift */; };
+		889492CE2AE9613900630CBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 889492CD2AE9613900630CBF /* Assets.xcassets */; };
+		889492D22AE9613900630CBF /* HaloWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 889492BF2AE9613600630CBF /* HaloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		88A12FDD2AE31F5000041ACA /* StatsActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A12FDC2AE31F5000041ACA /* StatsActivityView.swift */; };
 		88A12FDF2AE3212800041ACA /* StatsActivityReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A12FDE2AE3212800041ACA /* StatsActivityReport.swift */; };
 		88A12FE22AE454D400041ACA /* PlusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A12FE12AE454D400041ACA /* PlusMenu.swift */; };
@@ -115,6 +179,13 @@
 			remoteGlobalIDString = 887367C92AE1CF7700408BD5;
 			remoteInfo = ShieldConfiguration;
 		};
+		889492D02AE9613900630CBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8856AE432A9AAB3A008D5403 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 889492BE2AE9613600630CBF;
+			remoteInfo = HaloWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -126,6 +197,7 @@
 			files = (
 				887367D52AE1CF7700408BD5 /* ShieldConfiguration.appex in Embed Foundation Extensions */,
 				880028BC2AE06A5B0077265A /* DeviceActivityMonitor.appex in Embed Foundation Extensions */,
+				889492D22AE9613900630CBF /* HaloWidgetExtension.appex in Embed Foundation Extensions */,
 				887367C22AE1CF6A00408BD5 /* ShieldAction.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -172,6 +244,8 @@
 		882213442AA3E58500F59F11 /* AverageScreentime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageScreentime.swift; sourceTree = "<group>"; };
 		882EF0762ACCB18900B3B2CE /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		882EF0792ACCB42F00B3B2CE /* ShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopScreen.swift; sourceTree = "<group>"; };
+		8831CF022AE97E0500ADF9BA /* ScheduleSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSuccess.swift; sourceTree = "<group>"; };
+		8831CF042AE98E6200ADF9BA /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		8856AE4B2A9AAB3A008D5403 /* Halo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Halo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8856AE4E2A9AAB3A008D5403 /* HaloApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloApp.swift; sourceTree = "<group>"; };
 		8856AE502A9AAB3A008D5403 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -204,6 +278,15 @@
 		888903E52A9EC8AE00F4FADA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		889492B72AE60B1000630CBF /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
 		889492B92AE6C61100630CBF /* TypeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
+		889492BF2AE9613600630CBF /* HaloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HaloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		889492C02AE9613600630CBF /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		889492C22AE9613600630CBF /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		889492C52AE9613600630CBF /* HaloWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloWidgetBundle.swift; sourceTree = "<group>"; };
+		889492C72AE9613600630CBF /* HaloWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		889492C92AE9613600630CBF /* HaloWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloWidget.swift; sourceTree = "<group>"; };
+		889492CB2AE9613600630CBF /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		889492CD2AE9613900630CBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		889492CF2AE9613900630CBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A12FDC2AE31F5000041ACA /* StatsActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityView.swift; sourceTree = "<group>"; };
 		88A12FDE2AE3212800041ACA /* StatsActivityReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityReport.swift; sourceTree = "<group>"; };
 		88A12FE12AE454D400041ACA /* PlusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusMenu.swift; sourceTree = "<group>"; };
@@ -275,6 +358,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		889492BC2AE9613600630CBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				889492C32AE9613600630CBF /* SwiftUI.framework in Frameworks */,
+				889492C12AE9613600630CBF /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -284,6 +376,8 @@
 				880028B32AE06A5B0077265A /* DeviceActivity.framework */,
 				887367B92AE1CF6A00408BD5 /* ManagedSettings.framework */,
 				887367CC2AE1CF7700408BD5 /* ManagedSettingsUI.framework */,
+				889492C02AE9613600630CBF /* WidgetKit.framework */,
+				889492C22AE9613600630CBF /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -329,6 +423,7 @@
 				880028C82AE06D0F0077265A /* Report */,
 				887367BB2AE1CF6A00408BD5 /* ShieldAction */,
 				887367CE2AE1CF7700408BD5 /* ShieldConfiguration */,
+				889492C42AE9613600630CBF /* HaloWidget */,
 				880028B22AE06A5B0077265A /* Frameworks */,
 				8856AE4C2A9AAB3A008D5403 /* Products */,
 			);
@@ -342,6 +437,7 @@
 				880028C72AE06D0F0077265A /* Report.appex */,
 				887367B82AE1CF6A00408BD5 /* ShieldAction.appex */,
 				887367CA2AE1CF7700408BD5 /* ShieldConfiguration.appex */,
+				889492BF2AE9613600630CBF /* HaloWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -460,12 +556,26 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		889492C42AE9613600630CBF /* HaloWidget */ = {
+			isa = PBXGroup;
+			children = (
+				889492C52AE9613600630CBF /* HaloWidgetBundle.swift */,
+				889492C72AE9613600630CBF /* HaloWidgetLiveActivity.swift */,
+				889492C92AE9613600630CBF /* HaloWidget.swift */,
+				889492CB2AE9613600630CBF /* AppIntent.swift */,
+				889492CD2AE9613900630CBF /* Assets.xcassets */,
+				889492CF2AE9613900630CBF /* Info.plist */,
+			);
+			path = HaloWidget;
+			sourceTree = "<group>";
+		};
 		88A5AC242A9FDD20007263DA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				88A5AC282A9FDD88007263DA /* ViewModifiers */,
 				88A5AC252A9FDD2B007263DA /* Extensions */,
 				88A5AC3D2A9FE8A8007263DA /* Constants.swift */,
+				8831CF042AE98E6200ADF9BA /* NotificationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -551,6 +661,7 @@
 				8868D24E2AD1E30E00BD32ED /* TwoOptionMenu.swift */,
 				880029362AE1C63F0077265A /* UnlockModal.swift */,
 				88A12FE12AE454D400041ACA /* PlusMenu.swift */,
+				8831CF022AE97E0500ADF9BA /* ScheduleSuccess.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -610,6 +721,7 @@
 				880028D22AE06D0F0077265A /* PBXTargetDependency */,
 				887367C12AE1CF6A00408BD5 /* PBXTargetDependency */,
 				887367D42AE1CF7700408BD5 /* PBXTargetDependency */,
+				889492D12AE9613900630CBF /* PBXTargetDependency */,
 			);
 			name = Halo;
 			packageProductDependencies = (
@@ -653,6 +765,23 @@
 			productReference = 887367CA2AE1CF7700408BD5 /* ShieldConfiguration.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		889492BE2AE9613600630CBF /* HaloWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 889492D32AE9613900630CBF /* Build configuration list for PBXNativeTarget "HaloWidgetExtension" */;
+			buildPhases = (
+				889492BB2AE9613600630CBF /* Sources */,
+				889492BC2AE9613600630CBF /* Frameworks */,
+				889492BD2AE9613600630CBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HaloWidgetExtension;
+			productName = HaloWidgetExtension;
+			productReference = 889492BF2AE9613600630CBF /* HaloWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -678,6 +807,9 @@
 					887367C92AE1CF7700408BD5 = {
 						CreatedOnToolsVersion = 15.0;
 					};
+					889492BE2AE9613600630CBF = {
+						CreatedOnToolsVersion = 15.0;
+					};
 				};
 			};
 			buildConfigurationList = 8856AE462A9AAB3A008D5403 /* Build configuration list for PBXProject "Halo" */;
@@ -701,6 +833,7 @@
 				880028C62AE06D0F0077265A /* Report */,
 				887367B72AE1CF6A00408BD5 /* ShieldAction */,
 				887367C92AE1CF7700408BD5 /* ShieldConfiguration */,
+				889492BE2AE9613600630CBF /* HaloWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -717,6 +850,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF212AEAD95F00ADF9BA /* Prompt-BoldItalic.ttf in Resources */,
+				8831CF1D2AEAD95A00ADF9BA /* Prompt-Italic.ttf in Resources */,
+				8831CF192AEAD95500ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */,
+				8831CF2D2AEAD97300ADF9BA /* Prompt-Bold.ttf in Resources */,
+				8831CF0F2AEAD93B00ADF9BA /* Prompt-ExtraBold.ttf in Resources */,
+				8831CF082AEAD8E300ADF9BA /* Colors.xcassets in Resources */,
+				8831CF332AEAD97B00ADF9BA /* Prompt-Regular.ttf in Resources */,
+				8831CF252AEAD96900ADF9BA /* Prompt-Medium.ttf in Resources */,
+				8831CF292AEAD96E00ADF9BA /* Prompt-MediumItalic.ttf in Resources */,
+				8831CF0D2AEAD93300ADF9BA /* Prompt-SemiBold.ttf in Resources */,
+				8831CF0E2AEAD93800ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +880,7 @@
 				88A5AC412A9FEFC4007263DA /* Prompt-MediumItalic.ttf in Resources */,
 				881DD9932AA181EA006B3DBB /* Prompt-SemiBold.ttf in Resources */,
 				886291C92A9ECD2F008E13F3 /* Prompt-Bold.ttf in Resources */,
+				8831CF322AEAD97A00ADF9BA /* Prompt-Regular.ttf in Resources */,
 				8874181E2ACCA5D40042665A /* confetti.json in Resources */,
 				8856AE532A9AAB3D008D5403 /* Assets.xcassets in Resources */,
 			);
@@ -745,6 +890,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF1E2AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */,
+				8831CF2A2AEAD96E00ADF9BA /* Prompt-MediumItalic.ttf in Resources */,
+				8831CF262AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */,
+				8831CF222AEAD95F00ADF9BA /* Prompt-BoldItalic.ttf in Resources */,
+				8831CF1A2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */,
+				8831CF102AEAD93F00ADF9BA /* Prompt-ExtraBold.ttf in Resources */,
+				8831CF132AEAD94800ADF9BA /* Prompt-SemiBold.ttf in Resources */,
+				8831CF342AEAD97B00ADF9BA /* Prompt-Regular.ttf in Resources */,
+				8831CF162AEAD94F00ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */,
+				8831CF2E2AEAD97300ADF9BA /* Prompt-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,7 +907,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF232AEAD96000ADF9BA /* Prompt-BoldItalic.ttf in Resources */,
+				8831CF1F2AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */,
+				8831CF1B2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */,
+				8831CF312AEAD97500ADF9BA /* Prompt-Bold.ttf in Resources */,
+				8831CF142AEAD94800ADF9BA /* Prompt-SemiBold.ttf in Resources */,
+				8831CF172AEAD95000ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */,
+				8831CF352AEAD97C00ADF9BA /* Prompt-Regular.ttf in Resources */,
+				8831CF272AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */,
+				8831CF2C2AEAD96F00ADF9BA /* Prompt-MediumItalic.ttf in Resources */,
+				8831CF112AEAD93F00ADF9BA /* Prompt-ExtraBold.ttf in Resources */,
 				887367D92AE1D19600408BD5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		889492BD2AE9613600630CBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8831CF242AEAD96000ADF9BA /* Prompt-BoldItalic.ttf in Resources */,
+				8831CF202AEAD95B00ADF9BA /* Prompt-Italic.ttf in Resources */,
+				8831CF1C2AEAD95600ADF9BA /* Prompt-ExtraBoldItalic.ttf in Resources */,
+				8831CF302AEAD97500ADF9BA /* Prompt-Bold.ttf in Resources */,
+				8831CF152AEAD94900ADF9BA /* Prompt-SemiBold.ttf in Resources */,
+				8831CF182AEAD95000ADF9BA /* Prompt-SemiBoldItalic.ttf in Resources */,
+				8831CF362AEAD97C00ADF9BA /* Prompt-Regular.ttf in Resources */,
+				8831CF282AEAD96A00ADF9BA /* Prompt-Medium.ttf in Resources */,
+				8831CF2B2AEAD96F00ADF9BA /* Prompt-MediumItalic.ttf in Resources */,
+				8831CF122AEAD94200ADF9BA /* Prompt-ExtraBold.ttf in Resources */,
+				889492CE2AE9613900630CBF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,12 +976,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF0C2AEAD92D00ADF9BA /* Fonts+Generated.swift in Sources */,
+				8831CF372AEAD99E00ADF9BA /* ShadowViewModifier.swift in Sources */,
 				88A12FDD2AE31F5000041ACA /* StatsActivityView.swift in Sources */,
 				880028D82AE0B1C50077265A /* AppDeviceActivity.swift in Sources */,
 				880028DE2AE16ACD0077265A /* TotalActivityReport.swift in Sources */,
+				8831CF072AEAD8D300ADF9BA /* BoxCard.swift in Sources */,
 				880028CE2AE06D0F0077265A /* TotalActivityView.swift in Sources */,
+				8831CF062AEAD8BF00ADF9BA /* Constants.swift in Sources */,
 				88A12FDF2AE3212800041ACA /* StatsActivityReport.swift in Sources */,
 				880028DC2AE16A110077265A /* Report.swift in Sources */,
+				8831CF092AEAD8F000ADF9BA /* Colors+Generated.swift in Sources */,
+				8831CF0A2AEAD8FF00ADF9BA /* BlueArrow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +1015,7 @@
 				88A5AC382A9FE26B007263DA /* MainViewModel.swift in Sources */,
 				880BB3832AD0ADF7004307B2 /* DifficultyModal.swift in Sources */,
 				8868D24C2AD1E23200BD32ED /* RulesScreen.swift in Sources */,
+				8831CF052AE98E6200ADF9BA /* NotificationHelper.swift in Sources */,
 				882213432AA3CF6800F59F11 /* OptionButton.swift in Sources */,
 				88A5AC3E2A9FE8A8007263DA /* Constants.swift in Sources */,
 				8801716A2AE49EE80066CF75 /* UserModel.swift in Sources */,
@@ -838,6 +1028,7 @@
 				88A5AC222A9FC152007263DA /* Images+Generated.swift in Sources */,
 				88BED1702AE05B9400FEDA16 /* ConnectScreentime.swift in Sources */,
 				8801716C2AE4A5320066CF75 /* AppDelegate.swift in Sources */,
+				8831CF032AE97E0500ADF9BA /* ScheduleSuccess.swift in Sources */,
 				8868D2552AD1F5F200BD32ED /* CustomStyles.swift in Sources */,
 				887418182ACC9F1D0042665A /* MiddleModal.swift in Sources */,
 				889492B82AE60B1000630CBF /* RulesViewModel.swift in Sources */,
@@ -857,7 +1048,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF3B2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */,
 				887367BD2AE1CF6A00408BD5 /* ShieldActionExtension.swift in Sources */,
+				8831CF382AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +1058,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8831CF3C2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */,
 				887367D02AE1CF7700408BD5 /* ShieldConfigurationExtension.swift in Sources */,
+				8831CF392AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		889492BB2AE9613600630CBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8831CF3D2AEAE69700ADF9BA /* Fonts+Generated.swift in Sources */,
+				889492C82AE9613600630CBF /* HaloWidgetLiveActivity.swift in Sources */,
+				889492CC2AE9613600630CBF /* AppIntent.swift in Sources */,
+				889492C62AE9613600630CBF /* HaloWidgetBundle.swift in Sources */,
+				889492CA2AE9613600630CBF /* HaloWidget.swift in Sources */,
+				8831CF3A2AEAD99F00ADF9BA /* ShadowViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +1099,11 @@
 			isa = PBXTargetDependency;
 			target = 887367C92AE1CF7700408BD5 /* ShieldConfiguration */;
 			targetProxy = 887367D32AE1CF7700408BD5 /* PBXContainerItemProxy */;
+		};
+		889492D12AE9613900630CBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 889492BE2AE9613600630CBF /* HaloWidgetExtension */;
+			targetProxy = 889492D02AE9613900630CBF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -983,6 +1196,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D APP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo.Report;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1017,6 +1231,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D APP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo.Report;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1168,6 +1383,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D APP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1209,6 +1425,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D APP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1353,6 +1570,74 @@
 			};
 			name = Release;
 		};
+		889492D42AE9613900630CBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86SK3K6AM6;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaloWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HaloWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo.HaloWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		889492D52AE9613900630CBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86SK3K6AM6;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HaloWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HaloWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.nora.Halo.HaloWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1406,6 +1691,15 @@
 			buildConfigurations = (
 				887367D72AE1CF7700408BD5 /* Debug */,
 				887367D82AE1CF7700408BD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		889492D32AE9613900630CBF /* Build configuration list for PBXNativeTarget "HaloWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				889492D42AE9613900630CBF /* Debug */,
+				889492D52AE9613900630CBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

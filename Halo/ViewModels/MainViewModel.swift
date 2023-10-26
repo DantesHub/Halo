@@ -27,7 +27,9 @@ class MainViewModel: ObservableObject {
     var formattedTime: String {
         return secondsToHoursMinutesSeconds(seconds: timeRemaining)
     }
-    
+    @Published var isBreakTime = false
+    @Published var reward = 0
+    @Published var activeSchedule: Schedule = Schedule.templateSchedule
 
     
     
@@ -47,13 +49,11 @@ class MainViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
 
-    
-    
-    func startFocusSession() {
-        if isTimerRunning { return } // If the timer is already running, return immediately
-        
+    func getScheduleTimeRemaining() -> Int {
+        var ret = 0
         for schedule in user.schedules {
             if schedule.isActive && schedule.isOn {
+                activeSchedule = schedule
                 let calendar = Calendar.current
                 let now = Date()
                 let ends = schedule.ends
@@ -70,7 +70,7 @@ class MainViewModel: ObservableObject {
                 if currentTimeInMinutes < endTimeInMinutes {
                     let minutesLeft = endTimeInMinutes - currentTimeInMinutes
                     let timeIntervalLeft: TimeInterval = TimeInterval(minutesLeft * 60) // Convert minutes to seconds
-                    timeRemaining = Int(timeIntervalLeft)
+                    ret  = Int(timeIntervalLeft)
                     print("\(timeIntervalLeft) seconds left")
                 } else {
                     print("The schedule has ended for today.")
@@ -78,12 +78,20 @@ class MainViewModel: ObservableObject {
                 }
             }
         }
+        return ret
+
+    }
+    
+    func startFocusSession() {
+        if isTimerRunning { return } // If the timer is already running, return immediately
+        
+        timeRemaining = getScheduleTimeRemaining()
         
         UserDefaults.standard.set(Date(), forKey: "startTime")
         timerPublisher = Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
             .eraseToAnyPublisher()
-        
+        calculateReward()
         timerPublisher?
             .sink { [weak self] _ in
                 guard let self = self else { return }
@@ -93,10 +101,40 @@ class MainViewModel: ObservableObject {
                 } else {
                     self.cancellables.forEach { $0.cancel() }
                     self.isTimerRunning = false
+                    if isBreakTime { // reset to scheduled time or focustime left
+                        timeRemaining = getScheduleTimeRemaining()
+                        startFocusSession()
+                        isBreakTime = false
+                    } else {
+                        calculateReward()
+                    }
                 }
             }
             .store(in: &cancellables)
         isTimerRunning = true
+    }
+    
+    func calculateReward() {
+        let calendar = Calendar.current
+        let ends = activeSchedule.ends
+        let starts = activeSchedule.starts
+        let currentHour = calendar.component(.hour, from: starts)
+        let currentMinute = calendar.component(.minute, from:  starts)
+
+        let endHour = calendar.component(.hour, from: ends)
+        let endMinute = calendar.component(.minute, from: ends)
+//        if let rewardd = UserDefaults.standard.value(forKey: "currReward") as? Int {
+//            reward = rewardd
+//            reward += (endHour - currentHour) * 10
+//        }
+        // TODO: consequence for ending toggle early.
+        reward = (endHour - currentHour) * 10
+//        UserDefaults.standard.setValue(0, forKey: "lastHour")
+//        UserDefaults.standard.setValue(0, forKey: "currReward")
+        if reward > 120 { reward = 120  }
+        user.coins += reward
+        saveData()
+        print("reward", reward)
     }
  
     func stopFocusSession() {

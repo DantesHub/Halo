@@ -13,7 +13,7 @@ struct ShopScreen: View {
     @Binding var isPresented: Bool
     @State private var showModal = false
     @State private var animateBox = false
-
+    @ObservedObject var mainVM: MainViewModel
     // MARK: - Body
     @State private var animateBoxes: [HaloBox] = [HaloBox(name: "Tissue Box", img: Img.haloboxes6, price: 100), HaloBox(name: "Banana Milk", img: Img.haloboxes1, price: 1000), HaloBox(name: "Jack in the Box", img: Img.haloboxes2, price: 400), HaloBox(name: "Toolbox", img: Img.haloboxes3, price: 300), HaloBox(name: "Flower Box", img: Img.haloboxes4, price: 200), HaloBox(name: "Black Lava", img: Img.haloboxes5, price: 250)]// Assuming 12 boxes in total
     @State private var animateBoxes2: [HaloBox] = [HaloBox(name: "Tissue Box", img: Img.haloboxes7, price: 100), HaloBox(name: "Banana Milk", img: Img.haloboxes8, price: 1000), HaloBox(name: "Jack in the Box", img: Img.haloboxes9, price: 400), HaloBox(name: "Toolbox", img: Img.haloboxes10, price: 300), HaloBox(name: "Flower Box", img: Img.haloboxes11, price: 200), HaloBox(name: "Black Lava", img: Img.haloboxes12, price: 250)]// Assuming 12 boxes in total
@@ -22,8 +22,6 @@ struct ShopScreen: View {
     var body: some View {
         ZStack {
             GeometryReader { g in
-                let width = g.size.width
-                let height = g.size.height
                 VStack(spacing: 0) {
                     HStack {
                         Image(systemName: "arrow.backward.circle.fill")
@@ -43,7 +41,7 @@ struct ShopScreen: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 32)
-                            Text("1000")
+                            Text("\(mainVM.user.coins)")
                                 .font(Font.prompt(.medium, size: 24))
                         }
                     }.padding(.horizontal, 36)
@@ -138,7 +136,7 @@ struct ShopScreen: View {
 
 struct ShopScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ShopScreen(isPresented: .constant(false))
+        ShopScreen(isPresented: .constant(false), mainVM: MainViewModel())
     }
 }
 

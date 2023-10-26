@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>io.nora.halo.backgroundTask</string>
+		<string>io.nora.halo.backgroundTask1</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Prompt-SemiBoldItalic.ttf</string>
@@ -14,6 +19,12 @@
 		<string>Prompt-BoldItalic.ttf</string>
 		<string>Promt-Regular.ttf</string>
 		<string>Prompt-Bold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
 	</array>
 	<key>com.apple.developer.family-controls</key>
 	<string>true</string>

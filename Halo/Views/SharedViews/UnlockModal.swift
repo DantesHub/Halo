@@ -52,6 +52,8 @@ struct UnlockModal: View {
                 withAnimation {
                     showUnlock.toggle()
                     familyModel.unblockApps(minutes: selectedTime.rawValue)
+                    mainVM.isBreakTime = true
+                    mainVM.timeRemaining = familyModel.breakTimeLeft
                 }
             }).padding(.bottom, 32)
         }.frame(height: 400)

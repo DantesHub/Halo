@@ -123,19 +123,20 @@ class FamilyViewModel: ObservableObject {
         store.gameCenter.denyMultiplayerGaming = true
         store.media.denyMusicService = false
     }
-    
+    func unblockApps() {
+        store.shield.applications = nil
+        store.shield.applicationCategories = nil
+        store.shield.webDomains = nil
+        store.shield.webDomainCategories = nil
+
+    }
     func unblockApps(minutes: Int) {
         let applicationLst = store.shield.applications
         let categoriesLst = store.shield.applicationCategories
         let webDomains = store.shield.webDomains
         let webDomainCategories = store.shield.webDomainCategories
         
-        
-        store.shield.applications = nil
-        store.shield.applicationCategories = nil
-        store.shield.webDomains = nil
-        store.shield.webDomainCategories = nil
-        
+        unblockApps()
         
         var timePassed = 0
         
@@ -144,6 +145,7 @@ class FamilyViewModel: ObservableObject {
         let seconds = minutes * 60
         breakTimeLeft = seconds
         // Timer
+        
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] (t) in
             timePassed += 1
             breakTimeLeft -= 1

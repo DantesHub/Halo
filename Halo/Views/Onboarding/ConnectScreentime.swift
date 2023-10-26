@@ -11,16 +11,15 @@ import Report
 import DeviceActivity
 
 extension DeviceActivityReport.Context {
-  static let totalActivity = Self("Total Activity")
   static let stats = Self("Stats")
 }
 
-
+// QUESTION: why does it take 20 seconds to update here but it happens instantly on homescreen
 struct ConnectScreentime: View {
     @State var isPresented = false
     @StateObject var familyModel = FamilyViewModel.shared
  
-    @State private var context: DeviceActivityReport.Context = .stats
+    @State private var context: DeviceActivityReport.Context = .totalActivity
     @State private var filter = DeviceActivityFilter(
         segment: .daily(
             during: Calendar.current.dateInterval(

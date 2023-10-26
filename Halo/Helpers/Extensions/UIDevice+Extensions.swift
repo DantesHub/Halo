@@ -27,6 +27,7 @@ extension UIDevice {
                 return false
             }
         }
+      
     
         static var isIPad: Bool {
             UIDevice.current.userInterfaceIdiom == .pad

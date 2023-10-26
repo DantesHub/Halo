@@ -16,8 +16,8 @@ import SwiftUI
             TotalActivityView(activityReport: totalActivity)
         }
         // Add more reports here...
-        StatsActivityReport { totalActivity in
-            StatsActivityView(activityReport: totalActivity)
-        }
+//        StatsActivityReport { totalActivity in
+//            StatsActivityView(activityReport: totalActivity)
+//        }
     }
 }

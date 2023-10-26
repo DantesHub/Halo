@@ -8,15 +8,16 @@
 import DeviceActivity
 import SwiftUI
 
+
 extension DeviceActivityReport.Context {
     static let totalActivity = Self("Total Activity")
     static let stats = Self("Stats")
-//    static let pieChart = Self("pieChart")
+    static let pieChart = Self("pieChart")
 }
 
 struct TotalActivityReport: DeviceActivityReportScene {
     
-    let context: DeviceActivityReport.Context = .totalActivity
+    let context: DeviceActivityReport.Context = .pieChart
     
     let content: (ActivityReport) -> TotalActivityView
     
@@ -46,7 +47,18 @@ struct TotalActivityReport: DeviceActivityReportScene {
                 }
             }
         }
+        // this is getting triggered 2nd but not updating the userdefault
+        let sharedDefaults = UserDefaults.init(suiteName: "group.io.nora.deviceActivity")
+        let activityReport = ActivityReport(totalDuration: totalActivityDuration, apps: list, numberOfPickUps: numberOfPickUpsValue)
+        sharedDefaults?.set("goat shit9", forKey: "totalActivity")
+        sharedDefaults?.synchronize()
         
-        return ActivityReport(totalDuration: totalActivityDuration, apps: list, numberOfPickUps: numberOfPickUpsValue)
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName("io.nora.deviceActivityUpdate" as CFString), nil, nil, true)
+
+        return activityReport
     }
+}
+
+extension Notification.Name {
+    static let sharedDefaultsUpdated = Notification.Name("sharedDefaultsUpdated")
 }

@@ -21,6 +21,7 @@ struct MainView: View {
     @State private var addAppLimit: Bool = false
     @State private var addAppSchedule: Bool = false
     @State private var toggleAllDay: Bool = true
+    @State private var showScheduleSuccess: Bool = true
 
     
     init(mainViewModel: MainViewModel) {
@@ -72,7 +73,7 @@ struct MainView: View {
 
                 }
             
-                Color.black.opacity(tappedPlus || showModal || showUnlock || addAppSchedule || addAppLimit ? 0.5 : 0)
+                Color.black.opacity(tappedPlus || showModal || showUnlock || addAppSchedule || addAppLimit || showScheduleSuccess ? 0.5 : 0)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
@@ -88,6 +89,8 @@ struct MainView: View {
                     .offset(y: tappedPlus ?  (UIScreen.main.bounds.height / 2 - 164) : UIScreen.main.bounds.height)
                 MiddleModal(showModal: $showModal)
                     .offset(y: showModal ?  0 : UIScreen.main.bounds.height)
+                ScheduleSuccess(mainVM: mainVM, showModal: $showScheduleSuccess)
+                    .offset(y: showScheduleSuccess ?  0 : UIScreen.main.bounds.height)
                 DifficultyModal(mainVM: mainVM, showDifficulty: $tappedDifficulty)
                     .offset(y: tappedDifficulty ?  (UIScreen.main.bounds.height / 2 - 172) : UIScreen.main.bounds.height)
                 UnlockModal(mainVM: mainVM, showUnlock: $showUnlock)
@@ -100,7 +103,7 @@ struct MainView: View {
             }.navigationBarTitle("")
             .navigationBarHidden(true)
             .sheet(isPresented: $showShop) {
-                ShopScreen(isPresented: $showShop)
+                ShopScreen(isPresented: $showShop, mainVM: mainVM)
             }
             .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("breakTime")), perform: { _ in
                 withAnimation {
