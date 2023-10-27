@@ -21,7 +21,7 @@ struct HaloApp: App {
             if name?.rawValue as! String == "io.nora.deviceActivityUpdate" {
                 DispatchQueue.main.async {
                     // Update your UI or data here
-                    let sharedDefaults = UserDefaults(suiteName: "group.io.nora.deviceActivity")
+                    let sharedDefaults = UserDefaults(suiteName: "group.86SK3K6AM6.io.nora.Halo.updateActivity")
                     let activityValue = sharedDefaults?.string(forKey: "totalActivity")
                     print("Updated UserDefaults Value: \(activityValue ?? "No value found")")
                 }
@@ -41,7 +41,7 @@ struct HaloApp: App {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     
                 }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                    let sharedDefaults = UserDefaults(suiteName: "group.io.nora.deviceActivity")
+                    let sharedDefaults = UserDefaults(suiteName: "group.86SK3K6AM6.io.nora.Halo.updateActivity")
                     let activityValue = sharedDefaults?.string(forKey: "totalActivity")
                     print("Direct UserDefaults Value: \(activityValue ?? "No value found")")
                 }
@@ -72,7 +72,7 @@ class UserDefaultsObserver: ObservableObject {
 
     init() {
         // this is getting triggered first 
-        UserDefaults(suiteName: "group.io.nora.deviceActivity")?
+        UserDefaults(suiteName: "group.86SK3K6AM6.io.nora.Halo.updateActivity")?
             .publisher(for: \.totalActivity)
             .sink { [weak self] in
                 self?.totalActivity = $0

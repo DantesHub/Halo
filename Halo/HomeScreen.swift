@@ -155,8 +155,8 @@ struct HomeScreen: View {
             }
         }.onAppear {
             updateData()
-            let sharedDefaults = UserDefaults(suiteName: "group.io.nora.deviceActivity")
-            let data = sharedDefaults?.object(forKey: "totalActivity")
+            let sharedDefaults = UserDefaults(suiteName: "group.86SK3K6AM6.io.nora.Halo.updateActivity")
+            let data = sharedDefaults?.string(forKey: "totalActivity")
             print(data, "westside")
         }
         .familyActivityPicker(isPresented: $isPresented, selection: $familyModel.selectionToDiscourage)

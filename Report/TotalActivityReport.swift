@@ -48,11 +48,20 @@ struct TotalActivityReport: DeviceActivityReportScene {
             }
         }
         // this is getting triggered 2nd but not updating the userdefault
-        let sharedDefaults = UserDefaults.init(suiteName: "group.io.nora.deviceActivity")
+        let sharedDefaults = UserDefaults(suiteName: "group.86SK3K6AM6.io.nora.Halo.updateActivity")
         let activityReport = ActivityReport(totalDuration: totalActivityDuration, apps: list, numberOfPickUps: numberOfPickUpsValue)
         sharedDefaults?.set("goat shit9", forKey: "totalActivity")
         sharedDefaults?.synchronize()
-        
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.86SK3K6AM6.changeShield")
+
+        if containerURL == nil {
+        // The container does not exist.
+            print("container doesn't exist")
+        } else {
+            print("containerURL \(containerURL)")
+        }
+
+
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName("io.nora.deviceActivityUpdate" as CFString), nil, nil, true)
 
         return activityReport
